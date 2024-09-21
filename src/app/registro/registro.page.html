@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
+    <ion-title>registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card>
+    <ion-card-header style="text-align: center;">
+      <ion-card-title>registro</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formularioregistro">
+
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input formControlName="nombre"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Clave</ion-label>
+          <ion-input formControlName="clave" type="password"></ion-input>
+        </ion-item>
+
+      <ion-item>
+        <ion-label position="floating">Confirmar Clave</ion-label>
+        <ion-input formControlName="confirmarclave" type="password"></ion-input>
+      </ion-item>
+    </form>
+      <br>
+      <div class="button-container">
+        <ion-button (click)="guardar()">Registarse</ion-button>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
