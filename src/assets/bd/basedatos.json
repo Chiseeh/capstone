@@ -1,0 +1,39 @@
+{
+  "usuarios": [
+    {
+      "id": "d4d4",
+      "nombre": "a",
+      "clave": "a",
+      "quejas": []
+    },
+    {
+      "id": "1c7b",
+      "nombre": "alo",
+      "clave": "alo",
+      "quejas": []
+    }
+  ],
+  "quejas": [
+    {
+      "id": 1726958642840,
+      "titulo": "ayuda",
+      "descripcion": "quemaron un perro",
+      "categoria": "seguridad",
+      "idUsuario": 0
+    },
+    {
+      "id": 1726965602925,
+      "titulo": "pe causa",
+      "descripcion": "be cause",
+      "categoria": "seguridad",
+      "idUsuario": 0
+    },
+    {
+      "id": 1726965726125,
+      "titulo": "a",
+      "descripcion": "a",
+      "categoria": "infraestructura",
+      "idUsuario": 0
+    }
+  ]
+}

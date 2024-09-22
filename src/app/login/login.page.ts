@@ -1,6 +1,7 @@
-import {Component, OnInit } from '@angular/core';
-import { FormGroup,FormControl,Validators,FormBuilder } from '@angular/forms'; //imports para formulario.
+import { Component, OnInit } from '@angular/core';
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'; // imports para formulario.
 import { AlertController, NavController } from '@ionic/angular';
+import { ApiService } from '../servicios/api.service'; // Importar ApiService
 
 @Component({
   selector: 'app-login',
@@ -10,37 +11,48 @@ import { AlertController, NavController } from '@ionic/angular';
 export class LoginPage implements OnInit {
   formulariologin: FormGroup;
 
-  constructor(public fb: FormBuilder,private alertController: AlertController,private NavCtrl: NavController) {
-    this.formulariologin = this.fb.group({
-      'nombre': new FormControl("",Validators.required),
-      'clave': new FormControl("",Validators.required)
-    })
-   }
 
-  ngOnInit() {
+  constructor(
+    public fb: FormBuilder,
+    private alertController: AlertController,
+    private navCtrl: NavController,
+    private apiService: ApiService // Inyección del servicio
+  ) {
+    this.formulariologin = this.fb.group({
+      'nombre': new FormControl("", Validators.required),
+      'clave': new FormControl("", Validators.required)
+    });
+
 
   }
 
-async Ingresar() {
-  var f = this.formulariologin.value;
-  var usuarioString = localStorage.getItem('usuario');
-  if (usuarioString !== null) {
-    var usuario = JSON.parse(usuarioString);
-    if (usuario.nombre == f.nombre && usuario.password == f.clave) {
-      console.log('Ingresado');
-      localStorage.setItem('ingresado', 'true');
-      this.NavCtrl.navigateRoot('inicio');
+  ngOnInit() {}
 
+  async Ingresar() {
+    const f = this.formulariologin.value;
 
-    } else {
+    this.apiService.obtenerUsuarioPorNombreYContra(f.nombre, f.clave).subscribe(async usuario => {
+      if (usuario) {
+        console.log('Ingresado');
+        localStorage.setItem('ingresado', 'true');
+        this.navCtrl.navigateRoot('inicio');
+      } else {
+        const alert = await this.alertController.create({
+          header: 'Datos incorrectos',
+          message: 'Usuario o contraseña incorrectos.',
+          buttons: ['Aceptar'],
+        });
+        await alert.present();
+      }
+    }, async error => {
       const alert = await this.alertController.create({
-        header: 'Datos incorrectos',
-        message: 'Tienes que llenar todos los datos',
+        header: 'Error',
+        message: 'Hubo un problema al intentar ingresar.',
         buttons: ['Aceptar'],
       });
       await alert.present();
-    }
-  } else {
-    // Manejo de caso cuando no se encuentra el valor en localStorage
+    });
   }
-}}
+
+
+}

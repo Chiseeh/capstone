@@ -1,18 +1,41 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title>inicio</ion-title>
+    <ion-title>Inicio</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">inicio</ion-title>
+      <ion-title size="large">Inicio</ion-title>
     </ion-toolbar>
   </ion-header>
 
+  <!-- Grid para los botones -->
+  <ion-grid>
+    <!-- Primera fila con dos botones -->
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" color="primary" [routerLink]="['/quejas']">Queja</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" color="secondary">Evento</ion-button>
+      </ion-col>
+    </ion-row>
+
+    <!-- Segunda fila con dos botones -->
+    <ion-row>
+      <ion-col size="6">
+        <ion-button expand="block" color="tertiary">Reportar</ion-button>
+      </ion-col>
+      <ion-col size="6">
+        <ion-button expand="block" color="success">Noticias</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
   <!-- Botón para cerrar sesión -->
-  <ion-button (click)="cerrarSesion()" expand="full">
+  <ion-button (click)="cerrarSesion()" expand="full" color="danger" style="margin-top: 20px;">
     Cerrar Sesión
   </ion-button>
 </ion-content>
