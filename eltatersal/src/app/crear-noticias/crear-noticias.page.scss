@@ -1,0 +1,22 @@
+ion-toolbar {
+  --background: #16613a;
+  --color: white;
+
+  --min-height: 80px;
+  --padding-top: 20px;
+  --padding-bottom: 20px;
+}
+
+ion-button {
+  --background: #1c8750;
+  --background-hover: #9ce0be;
+  --background-activated: #88f4be;
+  --background-focused: #88f4be;
+
+  --color: white;
+
+  --border-radius: 15px;
+
+  --padding-top: 10px;
+  --padding-bottom: 10px;
+}

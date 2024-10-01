@@ -1,0 +1,7 @@
+{
+  "name": "eltatersal",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}

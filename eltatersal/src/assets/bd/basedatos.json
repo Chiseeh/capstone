@@ -1,0 +1,102 @@
+{
+  "usuarios": [
+    {
+      "id": "d4d4",
+      "nombre": "a",
+      "clave": "a",
+      "quejas": []
+    },
+    {
+      "id": "1c7b",
+      "nombre": "alo",
+      "clave": "alo",
+      "quejas": []
+    },
+    {
+      "id": "d3f1",
+      "nombre": "vecinoadm",
+      "clave": "vecinoadm",
+      "quejas": [],
+      "admin": true
+    }
+  ],
+  "quejas": [
+    {
+      "id": "1727398241566",
+      "titulo": "murillo",
+      "descripcion": "a",
+      "categoria": "evento deportivo",
+      "idUsuario": "d4d4",
+      "nombreUsuario": "a",
+      "estado": "resuelto",
+      "respuesta": "se"
+    },
+    {
+      "id": "1727398258045",
+      "titulo": "pepe",
+      "descripcion": "pepe",
+      "categoria": "evento deportivo",
+      "idUsuario": "1c7b",
+      "nombreUsuario": "alo",
+      "estado": "resuelto",
+      "respuesta": "pepe"
+    },
+    {
+      "id": "1727398417484",
+      "titulo": "coito",
+      "descripcion": "ke",
+      "categoria": "evento deportivo",
+      "idUsuario": "1c7b",
+      "nombreUsuario": "alo",
+      "estado": "resuelto",
+      "respuesta": "no"
+    },
+    {
+      "id": "1727398801638",
+      "titulo": "a",
+      "descripcion": "a",
+      "categoria": "seguridad",
+      "idUsuario": "d4d4"
+    },
+    {
+      "id": "1727398812917",
+      "titulo": "aa",
+      "descripcion": "aa",
+      "categoria": "seguridad",
+      "idUsuario": "d4d4"
+    },
+    {
+      "id": "1727399302917",
+      "titulo": "fulvo",
+      "descripcion": "ronaldihno",
+      "categoria": "evento deportivo",
+      "idUsuario": "1c7b"
+    },
+    {
+      "id": "1727578282935",
+      "titulo": "prueba de estado",
+      "descripcion": "a",
+      "categoria": "infraestructura",
+      "idUsuario": "d4d4",
+      "estado": "en proceso"
+    }
+  ],
+  "reportes": [
+    {
+      "id": "1727661784779",
+      "direccion": "rapanui",
+      "descripcion": "se robaron un moai",
+      "categoria": "Robo"
+    }
+  ],
+  "evento": [],
+  "noticias": [
+    {
+      "id": "7887",
+      "idNoticia": 0,
+      "titulo": "encerrona",
+      "descripcion": "encerrona en el persa",
+      "fecha": "2024-09-12"
+    }
+  ]
+}

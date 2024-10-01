@@ -1,0 +1,138 @@
+.title-large {
+  font-size: 1.8em;
+  font-weight: bold;
+  text-align: center;
+  padding: 0.5em 0;
+}
+
+
+.intro-card {
+  background-color: rgba(67, 67, 67, 0.9); /* Fondo con color oscuro */
+  background-size: cover; /* Cubre toda la tarjeta */
+  padding: 20px 30px; /* Aumentar el relleno para darle un aspecto más rectangular */
+  border-radius: 8px; /* Esquinas redondeadas */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2); /* Sombra */
+  color: #333; /* Texto oscuro para mejor legibilidad */
+  text-align: center; /* Centrar el texto */
+  max-width: 90%; /* Ancho máximo */
+  height: auto; /* Altura automática */
+  margin: 10px auto; /* Centrar horizontalmente */
+  transition: transform 0.3s ease; /* Suaviza la animación al pasar el ratón */
+}
+
+.intro-icon {
+  width: 100%; /* Ajusta el ancho para que ocupe el 100% del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  object-fit: cover; /* Mantiene la relación de aspecto y cubre el área */
+  border-radius: 0 !important; /* Elimina esquinas redondeadas */
+  margin-bottom: 15px; /* Espacio debajo del ícono */
+}
+
+.intro-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada al pasar el ratón */
+  transform: translateY(-5px); /* Efecto de elevación */
+}
+
+.intro-container {
+  padding: 10px; /* Mantener el padding interno */
+}
+
+.intro-icon {
+  width: 80px; /* Aumentar el tamaño del ícono */
+  height: 80px; /* Asegurar la proporción del ícono */
+  margin-bottom: 10px; /* Espacio entre el ícono y el texto */
+  border: 3px solid #FFD700; /* Borde dorado alrededor del ícono */
+  border-radius: 50%; /* Hacer el borde redondeado */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra alrededor del ícono */
+  background-color: #fff; /* Fondo blanco para resaltar el ícono */
+}
+
+.intro-container h2 {
+  font-size: 1.4em; /* Aumentar el tamaño de letra */
+  margin: 1em 0; /* Espaciado aumentado */
+  color: #fff; /* Asegúrate de que sea visible */
+}
+
+.intro-container p {
+  font-size: 1em; /* Aumentar el tamaño de texto */
+  margin-bottom: 1em; /* Espaciado aumentado */
+  color: rgba(255, 255, 255, 0.8); /* Color del texto */
+}
+
+.inicio-content {
+  --background: none; /* Quita el fondo predeterminado */
+  background-image: url('/assets/images/ciudad.jpg'); /* Ruta de la imagen */
+  background-size: cover; /* Cubre toda la pantalla */
+  background-position: center center; /* Centra la imagen */
+  background-repeat: no-repeat; /* No repite la imagen */
+}
+
+ion-card {
+  background-color: rgba(255, 255, 255, 0.8); /* Fondo semitransparente */
+  color: #333; /* Texto oscuro */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Añade sombra para más visibilidad */
+}
+
+ion-card-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.card {
+  height: 120px; /* Fija la altura de los botones */
+  display: flex; /* Para centrar el contenido */
+  flex-direction: column; /* Alineación vertical */
+  justify-content: center; /* Centrar verticalmente */
+  align-items: center; /* Centrar horizontalmente */
+  text-align: center; /* Centrar texto */
+  padding: 1.5em; /* Relleno */
+  border-radius: 8px; /* Esquinas redondeadas */
+  transition: transform 0.3s ease; /* Suaviza la animación al pasar el ratón */
+}
+
+.card h3 {
+  margin-top: 0.5em;
+  font-size: 1.2em;
+  color: #333;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.logout-button {
+  padding: 20px 0;
+}
+
+/* Colores de las tarjetas */
+.register-complaint {
+  background-color: rgba(255, 165, 0, 0.8);
+}
+
+.events {
+  background-color: rgba(255, 215, 0, 0.8);
+}
+
+.report-situation {
+  background-color: rgba(144, 238, 144, 0.8);
+}
+
+.news {
+  background-color: rgba(173, 216, 230, 0.8);
+}
+
+/* Animación de desvanecimiento para la intro-card */
+.intro-card {
+  animation: fadeIn 0.5s; /* Agrega una animación de desvanecimiento */
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}

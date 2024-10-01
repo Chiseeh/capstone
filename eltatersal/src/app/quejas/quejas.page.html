@@ -1,0 +1,128 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="volverAtras()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Quejas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Botón para Volver a Inicio -->
+  <ion-button (click)="volverInicio()" expand="full" color="secondary">
+    Volver a Inicio
+  </ion-button>
+
+  <!-- Listado de Quejas Registradas -->
+  <ion-grid *ngIf="quejas.length > 0">
+    <ion-row>
+      <ion-col size="12" *ngFor="let queja of quejas">
+        <div class="categoria-container" [ngStyle]="{ 'background-color': getColorForCategory(queja.categoria) }">
+          <ion-chip class="categoria-chip">
+            <ion-icon [name]="getIconForCategory(queja.categoria)" color="white"></ion-icon>
+            <ion-label class="categoria-label">{{ queja.categoria || 'Ninguna' }}</ion-label>
+          </ion-chip>
+        </div>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title style="color: black;">{{ queja.titulo }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>{{ queja.descripcion }}</p>
+            <p><strong>Categoría:</strong> {{ queja.categoria }}</p>
+            <p><strong>Estado:</strong> {{ queja.estado }}</p>
+
+            <!-- Mostrar la respuesta del admin si existe -->
+            <p *ngIf="queja.respuesta">
+              <strong>Respuesta del Admin:</strong> {{ queja.respuesta }}
+            </p>
+
+            <!-- Mostrar el nombre del usuario solo si el usuario actual es admin -->
+            <p *ngIf="usuarioActual && usuarioActual.admin">
+              <strong>Usuario:</strong> {{ queja.nombreUsuario }}
+            </p>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- Botón "Responder Queja" visible solo para administradores -->
+        <ion-button *ngIf="usuarioActual && usuarioActual.admin" (click)="responderQueja(queja)" color="tertiary">
+          Responder Queja
+        </ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Mensaje si no hay quejas -->
+  <ion-text color="medium" *ngIf="quejas.length === 0">
+    <p>No hay quejas registradas.</p>
+  </ion-text>
+
+  <!-- Botón flotante para abrir el formulario, solo visible si el usuario no es admin -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="usuarioActual && !usuarioActual.admin">
+    <ion-fab-button (click)="abrirFormulario()" style="color: #28a745;">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <!-- Modal para el Formulario de Quejas -->
+  <ion-modal [isOpen]="modalAbierto" (ionModalDidDismiss)="cerrarFormulario()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Registrar Queja</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarFormulario()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-content queja-formulario">
+        <div class="report-header">
+          <ion-icon name="chatbubble-ellipses-outline" class="report-icon" style="color: #28a745;"></ion-icon>
+          <h2>¿Desea aplicar una queja vecino?</h2>
+        </div>
+
+        <ion-card class="form-card queja-form-card">
+          <ion-card-content>
+            <form [formGroup]="nuevaQuejaForm" (ngSubmit)="registrarQueja()">
+              <ion-item>
+                <ion-label position="floating">Título</ion-label>
+                <ion-input formControlName="titulo"></ion-input>
+              </ion-item>
+              <div *ngIf="nuevaQuejaForm.get('titulo')!.invalid && nuevaQuejaForm.get('titulo')!.touched">
+                <p class="error-message">El título es obligatorio.</p>
+              </div>
+
+              <ion-item>
+                <ion-label position="floating">Descripción</ion-label>
+                <ion-textarea formControlName="descripcion"></ion-textarea>
+              </ion-item>
+              <div *ngIf="nuevaQuejaForm.get('descripcion')!.invalid && nuevaQuejaForm.get('descripcion')!.touched">
+                <p class="error-message">La descripción es obligatoria.</p>
+              </div>
+
+              <ion-item>
+                <ion-label>Categoría</ion-label>
+                <ion-select formControlName="categoria">
+                  <ion-select-option value="seguridad">Seguridad</ion-select-option>
+                  <ion-select-option value="evento deportivo">Evento Deportivo</ion-select-option>
+                  <ion-select-option value="infraestructura">Infraestructura</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <div *ngIf="nuevaQuejaForm.get('categoria')!.invalid && nuevaQuejaForm.get('categoria')!.touched">
+                <p class="error-message">La categoría es obligatoria.</p>
+              </div>
+
+              <ion-button type="submit" expand="full" class="submit-button queja-submit-button" shape="round" color="primary" [disabled]="nuevaQuejaForm.invalid">
+                Registrar Queja
+              </ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

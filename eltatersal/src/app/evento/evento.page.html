@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">Novedades de Eventos</ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/crear-evento']">AGREGAR</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-list>
+    <ion-item *ngFor="let e of eventos" [routerLink]="['/detalle', e.idEvento]">
+      <ion-label> {{ e.nombreEvento }} </ion-label>
+      <ion-label>{{ e.descripcion }}</ion-label>
+      <ion-label>{{ e.tipoEvento }}</ion-label>
+      <ion-label>{{ e.horaInicio }}</ion-label>
+    </ion-item>
+  </ion-list>
+</ion-content>

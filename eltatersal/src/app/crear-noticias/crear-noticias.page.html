@@ -1,0 +1,37 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <strong>Registre una noticia</strong>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form>
+    <ion-item lines="full">
+      <ion-label position="floating">Titulo de la Noticia</ion-label>
+      <ion-input type="text" name="txtTitulo" [(ngModel)]="newNoticia.titulo" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Descripcion de la Noticia</ion-label>
+      <ion-input type="text" name="txtDescripcion" [(ngModel)]="newNoticia.descripcion" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Fecha de creación de la noticia</ion-label>
+      <ion-input type="date" name="txtFecha" [(ngModel)]="newNoticia.fecha" required></ion-input>
+    </ion-item>
+  </form>
+  <br>
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-button (click)="crearNoticia()" expand="block">Crear la Noticia</ion-button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

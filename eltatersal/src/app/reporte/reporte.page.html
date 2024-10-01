@@ -1,0 +1,123 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-button (click)="volverAtras()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Reportes</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-grid *ngIf="reportes.length > 0">
+    <ion-row>
+      <ion-col size="12" *ngFor="let reporte of reportes">
+        <div class="categoria-container" [ngStyle]="{ 'background-color': getColorForCategory(reporte.categoria) }">
+          <ion-chip class="categoria-chip">
+            <ion-icon [name]="getIconForCategory(reporte.categoria)" color="white"></ion-icon>
+            <ion-label class="categoria-label">{{ reporte.categoria || 'Ninguna' }}</ion-label>
+          </ion-chip>
+        </div>
+
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title style="color: black;">{{ reporte.direccion }}</ion-card-title> <!-- AGREGUE ESTILO CSS DIRECTO AL HTML POR PROBLEMAS CON CSS -->
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>{{ reporte.descripcion }}</p>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-text color="medium" *ngIf="reportes.length === 0">
+    <p>No hay reportes registrados.</p>
+  </ion-text>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="abrirFormulario()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-modal [isOpen]="modalAbierto" (ionModalDidDismiss)="cerrarFormulario()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title></ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarFormulario()" fill="clear">
+              <ion-icon name="close" color="dark"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-content">
+        <div class="report-header">
+          <ion-icon name="warning" class="report-icon"></ion-icon>
+          <h2>¿Desea reportar una situación vecino?</h2>
+        </div>
+
+        <ion-card class="form-card">
+          <ion-card-content>
+            <form (ngSubmit)="registrarReporte()" #reporteForm="ngForm">
+              <ion-item>
+                <ion-label position="floating" class="">Dirección</ion-label>
+                <ion-input [(ngModel)]="nuevoReporte.direccion" name="direccion" required></ion-input>
+              </ion-item>
+              <ion-text color="danger" *ngIf="reporteForm.submitted && !nuevoReporte.direccion">
+                Dirección es obligatoria.
+              </ion-text>
+
+              <ion-item>
+                <ion-label position="floating" class="">Descripción</ion-label>
+                <ion-textarea [(ngModel)]="nuevoReporte.descripcion" name="descripcion" required></ion-textarea>
+              </ion-item>
+              <ion-text color="danger" *ngIf="reporteForm.submitted && !nuevoReporte.descripcion">
+                Descripción es obligatoria.
+              </ion-text>
+
+              <ion-item>
+                <ion-label class="">Categoría</ion-label>
+                <ion-select [(ngModel)]="nuevoReporte.categoria" name="categoria" required>
+                  <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</ion-select-option>
+                </ion-select>
+              </ion-item>
+              <ion-text color="danger" *ngIf="reporteForm.submitted && !nuevoReporte.categoria">
+                Categoría es obligatoria.
+              </ion-text>
+
+              <ion-button type="submit" expand="full" class="submit-button" shape="round">
+                Reportar
+              </ion-button>
+            </form>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- Footer con los números de emergencia -->
+        <div class="emergency-footer">
+          <div class="emergency-card">
+            <ion-icon name="medical-outline"></ion-icon>
+            <span class="emergency-text">131</span>
+            <span style="color: black;">Ambulancia</span>
+          </div>
+          <div class="emergency-card">
+            <ion-icon name="flame-outline"></ion-icon>
+            <span class="emergency-text">132</span>
+            <span style="color: black;">Bomberos</span>
+          </div>
+          <div class="emergency-card">
+            <ion-icon name="shield-outline"></ion-icon>
+            <span class="emergency-text">133</span>
+            <span style="color: black;">Carabineros</span>
+          </div>
+        </div>
+
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+</ion-content>

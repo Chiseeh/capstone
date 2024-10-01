@@ -1,0 +1,40 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">
+      <strong>Publicación de noticias</strong>
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/crear-noticias']"> Crear Noticia </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" color="light">
+  <ion-grid>
+    <ion-row>
+      <ion-col>
+        <ion-card *ngFor="let n of noticias">
+          <ion-card-header>
+            <ion-card-title class="ion-text-center">{{ n.titulo }}</ion-card-title>
+          </ion-card-header>
+
+          <ion-card-content>
+            {{ n.descripcion }}
+          </ion-card-content>
+
+          <ion-card-content class="ion-text-center">
+            <ion-label>{{ n.fecha }}</ion-label>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+
+
+
+
+

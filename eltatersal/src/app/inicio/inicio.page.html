@@ -1,0 +1,76 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title class="title-large">Junta Vecinal</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" class="inicio-content">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Bienvenido</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+ <ion-card class="intro-card">
+  <div class="intro-container">
+    <img src="/assets/images/tate.PNG" alt="Comunidad" class="intro-icon highlight-icon" />
+    <h2>¡Bienvenido a la Junta de Vecinos El Tattersal!</h2>
+    <p>Conéctate y hagamos de nuestra comunidad un mejor lugar para todos.</p>
+  </div>
+</ion-card>
+
+  <!-- Grid de acciones principales con estilo personalizado -->
+  <ion-grid>
+    <ion-row>
+      <!-- Botón Registrar Queja -->
+      <ion-col size="6">
+        <ion-card button class="card register-complaint" [routerLink]="['/quejas']">
+          <ion-card-content>
+            <ion-icon name="megaphone-outline" size="large"></ion-icon>
+            <h3>Registrar Queja</h3>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Botón Eventos -->
+      <ion-col size="6">
+        <ion-card button class="card events" [routerLink]="['/evento']">
+          <ion-card-content>
+            <ion-icon name="calendar-outline" size="large"></ion-icon>
+            <h3>Eventos</h3>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+
+    <ion-row>
+      <!-- Botón Reportar Situación -->
+      <ion-col size="6">
+        <ion-card button class="card report-situation" [routerLink]="['/reporte']">
+          <ion-card-content>
+            <ion-icon name="alert-circle-outline" size="large" ></ion-icon>
+            <h3>Reportar Situación</h3>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <!-- Botón Noticias -->
+      <ion-col size="6">
+        <ion-card button class="card news" [routerLink]="['/noticia']">
+          <ion-card-content>
+            <ion-icon name="newspaper-outline" size="large"></ion-icon>
+            <h3>Noticias</h3>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- Botón para cerrar sesión -->
+  <div class="logout-button">
+    <ion-button (click)="cerrarSesion()" expand="full" color="danger">
+      <ion-icon name="log-out-outline" slot="start"></ion-icon>
+      Cerrar Sesión
+    </ion-button>
+  </div>
+</ion-content>
