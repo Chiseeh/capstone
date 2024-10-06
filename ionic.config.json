@@ -1,0 +1,7 @@
+{
+  "name": "vecinoadministrador",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
