@@ -1,0 +1,77 @@
+<ion-content [fullscreen]="true">
+
+  <div class="container"> <!-- Contenedor principal -->
+
+    <div class="menu-dashboard" id="sidebar" style="background-color: purple;">
+      <div class="top-menu">
+        <div class="logo">
+          <span>JuntaVecinal</span>
+        </div>
+        <div class="toggle">
+          <i class='bx bx-menu'></i>
+        </div>
+      </div>
+
+      <!-- Menú -->
+      <div class="menu">
+        <div class="enlace" (click)="irAInicio()">
+          <ion-icon name="home" size="small"></ion-icon>
+          <span>Inicio</span>
+        </div>
+        <div class="enlace" (click)="irAQuejas()">
+          <ion-icon name="chatbubbles" size="small"></ion-icon>
+          <span>Quejas</span>
+        </div>
+        <div class="enlace" (click)="irAEventos()">
+          <ion-icon name="calendar" size="small"></ion-icon>
+          <span>Eventos</span>
+        </div>
+        <div class="enlace" (click)="irANoticias()">
+          <ion-icon name="newspaper" size="small"></ion-icon>
+          <span>Noticias</span>
+        </div>
+        <div class="enlace" (click)="irAReportarSituacion()">
+          <ion-icon name="alert-circle" size="small"></ion-icon>
+          <span>Reportes</span>
+        </div>
+        <div class="enlace" (click)="irAGestionUsuarios()">
+          <ion-icon name="people" size="small"></ion-icon>
+          <span>Usuarios</span>
+        </div>
+        <div class="enlace" (click)="irADocumentos()">
+          <ion-icon name="document" size="small"></ion-icon>
+          <span>Documentos</span>
+        </div>
+        <div class="enlace" (click)="irALocales()">
+          <ion-icon name="storefront" size="small"></ion-icon> <!-- Icono para Locales -->
+          <span>Locales</span>
+        </div>
+        <div class="enlace" (click)="volverAlLogin()">
+          <ion-icon name="log-out" size="small"></ion-icon>
+          <span>Cerrar Sesión</span>
+        </div>
+      </div>
+    </div>
+    <div class="content">
+      <ion-list class="solicitudes-list">
+        <ion-item *ngFor="let solicitud of solicitudes" class="solicitud-item">
+          <ion-label>
+            <h2>{{ solicitud.usuario?.nombre }}</h2>
+            <p>{{ solicitud.documentType }}</p>
+          </ion-label>
+          <input type="file" (change)="onFileSelected($event, solicitud)" />
+          <ion-button
+            *ngIf="solicitud.documentoSubido !== undefined"
+            expand="full"
+            (click)="aceptarSolicitud(solicitud, solicitud.archivo)"
+            [disabled]="!solicitud.archivoSeleccionado"
+          >
+            {{ solicitud.documentoSubido ? 'Documento Enviado' : 'Enviar Documento' }}
+          </ion-button>
+        </ion-item>
+      </ion-list>
+    </div>
+
+  </div>
+
+</ion-content>

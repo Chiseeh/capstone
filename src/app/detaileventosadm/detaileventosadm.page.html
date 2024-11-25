@@ -1,0 +1,49 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-title>detaileventosadm</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <form class="content_div">
+    <ion-item lines="full">
+      <ion-label position="floating">Nombre del evento</ion-label>
+      <ion-input type="text" name="txtNombre" [(ngModel)]="evento.nombreEvento" required></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Descripción del evento <span id="subject">(Especifique la hora del evento)</span></ion-label>
+      <ion-input type="text" name="txtDescripcion" [(ngModel)]="evento.descripcion" required></ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-select label="Evento" [(ngModel)]="evento.tipoEvento"  name="cbxCategoria" required>
+        <ion-select-option value="Reuniones Mensuales">Reuniones Mensuales</ion-select-option>
+        <ion-select-option value="Talleres y Charlas">Talleres y Charlas</ion-select-option>
+        <ion-select-option value="Actividades Recreativas">Actividades Recreativas</ion-select-option>
+        <ion-select-option value="Limpieza de la Comunidad">Limpieza de la Comunidad</ion-select-option>
+        <ion-select-option value="Ferias y Mercados">Ferias y Mercados</ion-select-option>
+        <ion-select-option value="Eventos Culturales">Eventos Culturales</ion-select-option>
+        <ion-select-option value="Campañas de Seguridad">Campañas de Seguridad</ion-select-option>
+        <ion-select-option value="Celebraciones Festivas">Celebraciones Festivas</ion-select-option>
+      </ion-select>
+    </ion-item>
+
+    <!-- imagen -->
+    <ion-item lines="full">
+      <ion-input type="file" (change)="capturarImagen($event)" #imageProduct  name="txtImagen"></ion-input>
+    </ion-item>
+
+    <ion-item lines="full">
+      <ion-label position="floating">Fecha del evento</ion-label>
+      <ion-input type="date" [(ngModel)]="evento.horaInicio" [ngModelOptions]="{standalone: true}"></ion-input>
+    </ion-item>
+
+    <br>
+    <ion-row>
+      <ion-col>
+        <ion-button type="submit" (click)="saveChanges()" expand="block">Guardar Cambios</ion-button>
+      </ion-col>
+    </ion-row>
+  </form>
+</ion-content>

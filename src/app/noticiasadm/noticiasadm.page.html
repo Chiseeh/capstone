@@ -1,0 +1,143 @@
+<ion-content [fullscreen]="true" color="light">
+
+        <!-- Sidebar -->
+        <div class="menu-dashboard" id="sidebar">
+          <div class="top-menu">
+            <div class="logo">
+              <!-- Aquí se agrega el logo -->
+              <img src="assets/images/logo.png" alt="Logo de Junta Vecinal" class="logo-img">
+            </div>
+          </div>
+
+        <!-- Menú -->
+        <div class="menu">
+
+          <div class="enlace" (click)="irAInicio()">
+            <ion-icon name="home" size="small"></ion-icon>
+            <span>Inicio</span>
+          </div>
+
+          <div class="enlace" (click)="irAQuejas()">
+            <ion-icon name="chatbubbles" size="small"></ion-icon>
+            <span>Quejas</span>
+          </div>
+
+          <div class="enlace" (click)="irAEventos()">
+            <ion-icon name="calendar" size="small"></ion-icon>
+            <span>Eventos</span>
+          </div>
+
+          <div class="enlace" (click)="irANoticias()">
+            <ion-icon name="newspaper" size="small"></ion-icon>
+            <span>Noticias</span>
+          </div>
+
+          <div class="enlace" (click)="irAReportarSituacion()">
+            <ion-icon name="alert-circle" size="small"></ion-icon>
+            <span>Reportes</span>
+          </div>
+
+          <div class="enlace" (click)="irAGestionUsuarios()">
+            <ion-icon name="people" size="small"></ion-icon>
+            <span>Usuarios</span>
+          </div>
+
+          <div class="enlace" (click)="irALocales()">
+            <ion-icon name="storefront" size="small"></ion-icon> <!-- Icono para Locales -->
+            <span>Locales</span>
+          </div>
+
+          <div class="enlace" (click)="volverAlLogin()">
+            <ion-icon name="log-out" size="small"></ion-icon>
+            <span>Cerrar Sesión</span>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="content" style="background-image: url('assets/images/fondo2.png'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
+
+        <ion-card-header>
+          <ion-card-title style="display: flex; align-items: center; font-size: xx-large; color: #4a4e69; font-weight: bold;">
+            <ion-icon name="newspaper" style="font-size: 1.6em; color: #6d5dfc; margin-right: 10px;"></ion-icon>
+            Noticias
+            <!-- Botón para agregar/ocultar formulario -->
+              <ion-button
+              (click)="toggleFormulario()"
+              size="small"
+              fill="clear"
+              style="margin-left: auto; font-size: 1em; padding: 0.2em 0.5em; height: auto; width: auto;">
+              <ion-icon name="{{ mostrarFormulario ? 'close' : 'add' }}" slot="icon-only"></ion-icon>
+              </ion-button>
+
+          </ion-card-title>
+        </ion-card-header>
+
+        <!-- Campo de búsqueda -->
+        <ion-searchbar [(ngModel)]="searchTerm" (ionInput)="filtrarNoticias()" placeholder="Buscar noticias..."></ion-searchbar>
+
+
+        <!-- Formulario para crear noticia -->
+        <form *ngIf="mostrarFormulario" class="form-noticia">
+          <ion-item lines="full">
+            <ion-label position="floating">Título de la Noticia</ion-label>
+            <ion-input type="text" name="txtTitulo" [(ngModel)]="newNoticia.titulo" required></ion-input>
+          </ion-item>
+
+          <ion-item lines="full">
+            <ion-label position="floating">Descripción de la Noticia</ion-label>
+            <ion-input type="text" name="txtDescripcion" [(ngModel)]="newNoticia.descripcion" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Subir Imagen</ion-label>
+            <input type="file" accept="image/*" (change)="capturarImagen($event)" [disabled]="newNoticia.video != ''" />
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Subir Video</ion-label>
+            <input type="file" accept="video/*" (change)="capturarVideo($event)" [disabled]="newNoticia.imagen != ''" />
+          </ion-item>
+
+          <ion-button (click)="crearNoticia()" expand="block" class="btn-crear">Crear Noticia</ion-button>
+        </form>
+
+        <!-- Lista de Noticias -->
+        <div class="noticias-container">
+          <ion-card *ngFor="let n of noticias" class="card-noticia">
+            <ion-card-header>
+              <ion-card-title class="ion-text-center">{{ n.titulo }}</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content>
+              {{ n.descripcion }}
+            </ion-card-content>
+
+            <ion-card-content class="ion-text-center">
+              <ion-label>{{ n.fecha | date: 'mediumDate' }}</ion-label>
+            </ion-card-content>
+
+            <!-- Mostrar imagen si existe -->
+            <ion-card-content *ngIf="n.imagen">
+              <img [src]="n.imagen" class="imagen-noticia" />
+            </ion-card-content>
+
+            <!-- Mostrar video si existe -->
+            <ion-card-content *ngIf="n.video">
+              <video controls [src]="n.video" class="video-noticia"></video>
+            </ion-card-content>
+
+            <ion-footer style="display: flex; justify-content: flex-end; padding: 8px;">
+              <ion-button (click)="editarNoticia(n)" fill="clear" size="big" color="primary">
+                <ion-icon name="create" slot="icon-only" color="primary" style="font-size: 32px;"></ion-icon>
+              </ion-button>
+              <ion-button (click)="eliminarNoticia(n.id)" fill="clear" size="big" color="danger">
+                <ion-icon name="trash" slot="icon-only" color="danger" style="font-size: 32px;"></ion-icon>
+              </ion-button>
+            </ion-footer>
+          </ion-card>
+        </div>
+
+      </div>
+
+</ion-content>

@@ -1,0 +1,94 @@
+#sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  background-color: purple;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+  .top-menu {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+
+    .logo span {
+      font-size: 2em;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .toggle ion-icon {
+      font-size: 2.2em;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .menu .enlace {
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    border-radius: 12px;
+    transition: background-color 0.3s;
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+
+    ion-icon {
+      margin-right: 12px;
+    }
+
+    &:hover {
+      background-color: #1a2a3b;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.locales-container {
+  margin-left: 250px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  h2 {
+    text-align: center;
+    margin-bottom: 30px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 2rem;
+    color: #4a90e2;
+    font-weight: 700;
+  }
+
+  .tarjetas-container {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 1200px;
+    flex-wrap: wrap;
+  }
+
+  ion-card {
+    flex: 1;
+    margin: 10px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 16px rgba(0, 0, 0, 0.1);
+    background: #ffffff;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0px 6px 20px rgba(0, 0, 0, 0.2);
+    }
+  }
+
+  ion-button {
+    margin-top: 15px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+  }
+}

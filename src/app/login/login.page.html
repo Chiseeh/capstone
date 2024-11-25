@@ -1,0 +1,43 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title>Ingreso a Administración</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-card style="width: 400px; margin-top: auto; margin-bottom: auto; margin-left: auto; margin-right: auto;">
+    <ion-card-header style="text-align: center;">
+      <ion-card-title>Iniciar Sesión</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form [formGroup]="formulariologin">
+
+        <ion-item>
+          <ion-label position="floating">Correo</ion-label>
+          <ion-input formControlName="correo" type="email"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Clave</ion-label>
+          <ion-input formControlName="clave" type="password"></ion-input>
+        </ion-item>
+
+      </form>
+      <br>
+      <div class="button-container" style="text-align: center;">
+        <ion-button (click)="Ingresar()">Ingresar</ion-button>
+      </div>
+      <div class="button-container" style="text-align: center; margin-top: 10px;">
+        <a [routerLink]="['/reset-password']" style="color: var(--ion-color-primary); text-decoration: none;">¿Olvidaste tu Clave?</a>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>
+
+<ion-footer>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/registro']">Registrarse</ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-footer>

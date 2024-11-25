@@ -1,0 +1,197 @@
+// noticias.page.scss
+
+#sidebar {
+  position: fixed; /* Fija el sidebar */
+  width: 250px; /* Ajusta el ancho según necesites */
+  height: 100%; /* Ocupa toda la altura de la pantalla */
+  background-color: purple; /* Color de fondo */
+  overflow-y: auto; /* Desplazamiento vertical si es necesario */
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+  background-color: purple;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+  .top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .logo span {
+      font-size: 2em;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .toggle i {
+      font-size: 2.2em;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .menu .enlace {
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    border-radius: 12px;
+    transition: background-color 0.3s;
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+
+    ion-icon {
+      margin-right: 12px;
+    }
+
+    &:hover {
+      background-color: #1a2a3b;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+.content {
+  margin-left: 250px; /* Deja espacio para el sidebar */
+  padding: 20px; /* Agrega un poco de espacio alrededor del contenido */
+}
+
+/* Estilo del botón para crear noticias */
+.btn-crear-noticia {
+  background-color: #3880ff; /* Color del botón */
+  color: white;
+  font-weight: bold;
+  margin: 10px 0;
+  border-radius: 8px; /* Bordes redondeados */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.btn-crear-noticia:hover {
+  background-color: #3171e7; /* Color del botón cuando se pasa el mouse */
+}
+
+/* Estilo del formulario de noticias */
+.form-noticia {
+  background: #f9f9f9; /* Fondo del formulario */
+  padding: 16px;
+  border-radius: 12px; /* Bordes más redondeados */
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra más intensa */
+}
+
+.form-noticia ion-item {
+  margin-bottom: 16px; /* Espacio entre elementos del formulario */
+}
+
+/* Botón para crear noticia */
+.btn-crear {
+  background-color: #4caf50; /* Color del botón de crear */
+  color: white;
+  font-weight: bold;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.btn-crear:hover {
+  background-color: #45a049; /* Color del botón cuando se pasa el mouse */
+}
+
+/* Estilo para las tarjetas de noticias */
+.card-noticia {
+  background: #ffffff; /* Fondo de la tarjeta */
+  border-radius: 12px; /* Bordes redondeados */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); /* Sombra más suave */
+  margin: 16px 0;
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 650px; /* Máximo ancho de la tarjeta */
+  margin-left: auto; /* Centrar horizontalmente */
+  margin-right: auto; /* Centrar horizontalmente */
+  overflow: hidden; /* Evita desbordamientos */
+  transition: all 0.3s ease; /* Transición suave */
+}
+
+.card-noticia:hover {
+  transform: translateY(-5px); /* Desplazamiento al pasar el ratón */
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Sombra más intensa al pasar el ratón */
+}
+
+/* Imágenes dentro de las noticias */
+.imagen-noticia {
+  width: 100%; /* Imagen ocupa todo el ancho de la tarjeta */
+  height: 200px; /* Altura máxima */
+  object-fit: cover; /* Mantiene la relación de aspecto */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-top: 12px;
+}
+
+/* Estilo para el video dentro de las noticias */
+.video-noticia {
+  width: 100%; /* El video ocupa todo el ancho de la tarjeta */
+  height: 200px; /* Altura máxima */
+  object-fit: cover; /* Mantiene la relación de aspecto */
+  border-radius: 10px; /* Bordes redondeados */
+  margin-top: 12px;
+}
+
+/* Estilo del contenedor de noticias (2 columnas) */
+.noticias-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas */
+  gap: 20px; /* Espacio entre las tarjetas */
+  padding: 20px 0;
+}
+
+/* En pantallas pequeñas, una sola columna */
+@media (max-width: 768px) {
+  .noticias-container {
+    grid-template-columns: 1fr; /* Una columna en pantallas pequeñas */
+  }
+
+  .card-noticia {
+    max-width: 100%; /* Tarjeta ocupa todo el ancho en pantallas pequeñas */
+  }
+
+  .imagen-noticia, .video-noticia {
+    height: 180px; /* Ajuste en altura para dispositivos pequeños */
+  }
+}
+
+/* Contenido de la tarjeta (texto) */
+.ion-card-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  color: #333;
+}
+
+.ion-card-content {
+  padding: 10px;
+  font-size: 1rem;
+  color: #666;
+}
+
+.ion-footer {
+  display: flex;
+  justify-content: flex-end;
+  padding: 8px;
+  background: transparent;
+}
+
+.ion-footer ion-button {
+  margin-left: 10px;
+  border-radius: 50%; /* Botones redondeados */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+}
+
+.ion-footer ion-button:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+
+
+
+

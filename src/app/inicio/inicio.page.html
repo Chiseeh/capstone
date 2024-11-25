@@ -1,0 +1,525 @@
+<ion-content [fullscreen]="true">
+  <ion-grid style="background-image: url('assets/images/fondo1.png'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
+    <ion-row>
+        <!-- Sidebar -->
+        <div class="menu-dashboard" id="sidebar">
+          <div class="top-menu">
+            <div class="logo">
+              <!-- Aquí se agrega el logo -->
+              <img src="assets/images/logo.png" alt="Logo de Junta Vecinal" class="logo-img">
+            </div>
+          </div>
+
+        <!-- Menú -->
+        <div class="menu">
+
+          <div class="enlace" (click)="irAInicio()">
+            <ion-icon name="home" size="small"></ion-icon>
+            <span>Inicio</span>
+          </div>
+
+          <div class="enlace" (click)="irAQuejas()">
+            <ion-icon name="chatbubbles" size="small"></ion-icon>
+            <span>Quejas</span>
+          </div>
+
+          <div class="enlace" (click)="irAEventos()">
+            <ion-icon name="calendar" size="small"></ion-icon>
+            <span>Eventos</span>
+          </div>
+
+          <div class="enlace" (click)="irANoticias()">
+            <ion-icon name="newspaper" size="small"></ion-icon>
+            <span>Noticias</span>
+          </div>
+
+          <div class="enlace" (click)="irAReportarSituacion()">
+            <ion-icon name="alert-circle" size="small"></ion-icon>
+            <span>Reportes</span>
+          </div>
+
+          <div class="enlace" (click)="irAGestionUsuarios()">
+            <ion-icon name="people" size="small"></ion-icon>
+            <span>Usuarios</span>
+          </div>
+
+          <div class="enlace" (click)="irALocales()">
+            <ion-icon name="storefront" size="small"></ion-icon> <!-- Icono para Locales -->
+            <span>Locales</span>
+          </div>
+
+          <div class="enlace" (click)="volverAlLogin()">
+            <ion-icon name="log-out" size="small"></ion-icon>
+            <span>Cerrar Sesión</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Gráficos al lado del Sidebar -->
+      <ion-col size="9">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title style="display: flex; align-items: center; font-size: xx-large; color: #4a4e69;">
+              <ion-icon name="stats-chart" style="font-size: 1.6em; color: #6d5dfc; margin-right: 10px;"></ion-icon>
+              Administración
+            </ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <!-- Pestañas para alternar entre secciones -->
+            <ion-segment color="primary">
+              <ion-segment-button value="quejas" (click)="mostrarSeccion('quejas')">
+                <ion-label style="font-weight: bold;">Quejas</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="reportes" (click)="mostrarSeccion('reportes')">
+                <ion-label style="font-weight: bold;">Reportes</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="eventos" (click)="mostrarSeccion('eventos')">
+                <ion-label style="font-weight: bold;">Eventos</ion-label>
+              </ion-segment-button>
+              <ion-segment-button value="solicitudes" (click)="mostrarSeccion('solicitudes')">
+                <ion-label style="font-weight: bold;">Solicitudes</ion-label>
+              </ion-segment-button>
+            </ion-segment>
+          </ion-card-content>
+        </ion-card>
+
+        <!-- Contenido de Gráficos -->
+        <div *ngIf="seccionVisible === 'quejas'">
+
+            <ion-card-header>
+              <ion-card-title>Estadísticas de Quejas</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <!-- Sección de Quejas Pendientes -->
+              <ion-grid>
+                <ion-row>
+                  <!-- Total de Quejas Pendientes -->
+                  <ion-col size="6">
+                    <ion-card>
+                      <ion-card-header>
+                        <ion-card-title>Total de Quejas Pendientes</ion-card-title>
+                      </ion-card-header>
+                      <ion-card-content>
+                        <h2>Hay un total de <strong>{{ totalQuejasPendientes }}</strong> Quejas pendientes</h2>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+
+                  <!-- Quejas Pendientes por Categoría -->
+                  <ion-col size="6">
+                    <ion-card>
+                      <ion-card-header>
+                        <ion-card-title>Quejas Pendientes por Categoría</ion-card-title>
+                      </ion-card-header>
+                      <ion-card-content>
+                        <!-- Recorremos las categorías y mostramos su cantidad -->
+                        <div *ngFor="let categoria of ['seguridad', 'evento deportivo', 'infraestructura']">
+                          <p>{{ categoria | titlecase }}: {{ quejasPendientesPorCategoria[categoria] }}</p>
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+
+              <!-- Gráficos -->
+              <ion-grid>
+                <ion-row>
+                  <!-- Gráfico de Quejas Pendientes por Categoría -->
+                  <ion-col size="6">
+                    <ion-card>
+                      <ion-card-header>
+                        <ion-card-title>Quejas Pendientes por Categoría</ion-card-title>
+                      </ion-card-header>
+                      <ion-card-content>
+                        <div class="chart-container">
+                          <canvas id="myChartQuejasBarra" class="my-chart"></canvas>
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+
+                  <!-- Gráfico Semanal (Colocado en la misma fila) -->
+                  <ion-col size="6">
+                    <ion-card>
+                      <ion-card-header>
+                        <ion-card-title>Quejas Semanales</ion-card-title>
+                      </ion-card-header>
+                      <ion-card-content>
+                        <div class="chart-container">
+                          <canvas id="myChartQuejasSemanal" class="my-chart" style="margin-left: 80px;"></canvas>
+                        </div>
+                      </ion-card-content>
+                    </ion-card>
+                  </ion-col>
+                </ion-row>
+              </ion-grid>
+            </ion-card-content>
+
+            <!-- Listado de Quejas -->
+            <ion-row>
+              <ion-col size="12">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Listado de Quejas</ion-card-title>
+                  </ion-card-header>
+                  <!-- Barra de búsqueda -->
+                  <div class="search-bar">
+                    <ion-searchbar [(ngModel)]="searchTerm" placeholder="Buscar quejas..." (ionInput)="filtrarQuejas()" class="search-input"></ion-searchbar>
+                  </div>
+                  <ion-card-content>
+                    <ion-list>
+                      <ion-item *ngFor="let queja of quejasFiltradas">
+                        <ion-label>
+                          <h3>{{ queja.titulo }}</h3>
+                          <p><strong>Categoría:</strong> {{ queja.categoria }}</p>
+                          <p><strong>Estado:</strong> {{ queja.estado }}</p>
+                        </ion-label>
+                        <ion-button (click)="verDetalleQueja(queja)" fill="clear">
+                          <ion-icon name="information-circle" sslot="icon-only" color="medium" style="font-size: 32px;"></ion-icon>
+                        </ion-button>
+                        <ion-button (click)="eliminarQueja(queja.id)" fill="clear" color="danger">
+                          <ion-icon name="trash" slot="icon-only" color="danger" style="font-size: 32px;"></ion-icon>
+                        </ion-button>
+                      </ion-item>
+                    </ion-list>
+                    <div *ngIf="quejasFiltradas.length === 0">
+                      <p>No hay quejas para mostrar.</p>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <!-- Modal para Detalle de Queja -->
+            <ion-modal [isOpen]="modalDetalleAbierto" (ionModalDidClose)="modalDetalleAbierto = false">
+              <ng-template>
+                <ion-header>
+                  <ion-toolbar>
+                    <ion-title>Detalle de Queja</ion-title>
+                    <ion-buttons slot="end">
+                      <ion-button (click)="cerrarDetalleQueja()">
+                        <ion-icon name="close"></ion-icon>
+                      </ion-button>
+                    </ion-buttons>
+                  </ion-toolbar>
+                </ion-header>
+
+                <ion-content *ngIf="quejaSeleccionada">
+                  <ion-card>
+                    <ion-card-header>
+                      <div class="categoria-container">
+                        <ion-chip class="categoria-chip">
+                          <ion-icon color="white"></ion-icon>
+                          <ion-label class="categoria-label">{{ quejaSeleccionada.categoria || 'Ninguna' }}</ion-label>
+                        </ion-chip>
+                      </div>
+                      <ion-card-title>{{ quejaSeleccionada.titulo }}</ion-card-title>
+                    </ion-card-header>
+                    <ion-card-content>
+                      <p><strong>Descripción:</strong> {{ quejaSeleccionada.descripcion }}</p>
+                      <p><strong>Estado:</strong> {{ quejaSeleccionada.estado }}</p>
+                      <p *ngIf="quejaSeleccionada.respuesta"><strong>Respuesta:</strong> {{ quejaSeleccionada.respuesta }}</p>
+                      <p><strong>Usuario:</strong> {{ quejaSeleccionada.nombreUsuario?.nombre }} {{ quejaSeleccionada.nombreUsuario?.apellido }}</p>
+                      <p><strong>Fecha:</strong> {{ getFormattedDate(quejaSeleccionada.fecha) }}</p>
+                      <div class="imagen-contenedor">
+                        <img *ngIf="quejaSeleccionada.archivoAdjunto" [src]="quejaSeleccionada.archivoAdjunto" alt="Archivo Adjunto" class="adjunto-imagen" />
+                      </div>
+                      <ion-item>
+                        <ion-label position="floating">Respuesta del Admin</ion-label>
+                        <ion-textarea [(ngModel)]="respuestaAdmin"></ion-textarea>
+                      </ion-item>
+                    </ion-card-content>
+
+                    <ion-footer>
+                      <ion-button expand="full" color="success" (click)="cerrarCaso()">Cerrar Queja</ion-button>
+                      <ion-button expand="full" color="danger" (click)="eliminarQueja(quejaSeleccionada.id)">Eliminar Queja</ion-button>
+                    </ion-footer>
+                  </ion-card>
+                </ion-content>
+              </ng-template>
+            </ion-modal>
+        </div>
+
+
+
+        <div *ngIf="seccionVisible === 'reportes'">
+          <ion-grid>
+            <!-- Nueva Card para el Conteo de Reportes Realizados Hoy -->
+            <ion-row>
+              <ion-col size="12">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Reportes Realizados Hoy</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p>Hoy se han realizado un total de <strong>{{ reportesDeHoy.length }}</strong> reportes.</p>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <!-- Carrusel horizontal para el conteo de reportes por categoría -->
+            <div class="categorias-carrusel">
+              <div class="categoria-card" *ngFor="let categoria of categorias">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>{{ categoria }}</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <p>Reportes: <strong>{{ contarReportesPorCategoria(categoria) }}</strong></p>
+                  </ion-card-content>
+                </ion-card>
+              </div>
+            </div>
+
+
+            <ion-row>
+              <ion-col size="12">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Mascotas Perdidas</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div class="mascotas-perdidas-grid">
+                      <div class="mascota-card" *ngFor="let mascota of mascotasPerdidas">
+                        <img class="mascota-card__img" [src]="mascota.imagenAdjunta || 'default-image.jpg'" alt="{{ mascota.nombre }}">
+                        <div class="mascota-card__info">
+                          <h2 class="mascota-card__name">{{ mascota.nombre }}</h2>
+                          <p class="mascota-card__detail"><strong>Raza:</strong> {{ mascota.raza }}</p>
+                          <p class="mascota-card__detail"><strong>Ubicación:</strong> {{ mascota.ubicacionPerdida }}</p>
+                          <p class="mascota-card__detail"><strong>Fecha:</strong> {{ mascota.fechaPerdida | date: 'dd/MM/yyyy' }}</p>
+                          <!-- Icono de eliminar debajo de la fecha -->
+                          <ion-button fill="clear" color="danger" (click)="eliminarMascota(mascota)">
+                            <ion-icon slot="icon-only" name="trash"></ion-icon>
+                          </ion-button>
+                        </div>
+                      </div>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+
+            <!-- Gráficos de Reportes Diarios por Categoría y por Hora -->
+            <ion-row>
+              <ion-col size="6">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Reportes Diarios por Categoría</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div class="chart-container">
+                      <canvas id="myChartReportesCategoria" class="my-chart"></canvas>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+
+              <ion-col size="6">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Reportes Diarios por Hora</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div class="chart-container">
+                      <canvas id="myChartReportesDiario" class="my-chart"></canvas>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <!-- Gráfico de Reportes Semanales centrado -->
+            <ion-row class="ion-justify-content-center">
+              <ion-col size="8" class="ion-text-center">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Reportes Semanales</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div class="chart-container">
+                      <canvas id="myChartReportesSemanal" class="my-chart" style="margin-left: 80px;"></canvas>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+            <!-- Nueva Card para Reportes del Día de Hoy -->
+            <ion-row>
+              <ion-col size="12">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title>Reportes del Día de Hoy</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <ion-list>
+                      <ion-item *ngFor="let reporte of reportesDeHoy">
+                        <ion-label>
+                          <p><strong>Dirección: {{ reporte.direccion }}</strong></p>
+                          <p><strong>Categoría:</strong> {{ reporte.categoria }}</p>
+                          <p><strong>Descripción:</strong> {{ reporte.descripcion }}</p>
+                          <p><strong>Fecha:</strong> {{ reporte.fecha.toDate() | date:'short' }}</p>
+                        </ion-label>
+                        <!-- Botones para cada reporte -->
+
+                          <ion-button (click)="verDetalleReporte(reporte)" fill="clear" size="big">
+                            <ion-icon name="information-circle" slot="icon-only" color="medium" style="font-size: 32px;"></ion-icon>
+                          </ion-button>
+                          <ion-button (click)="editarReporte(reporte)" fill="clear" size="big" color="primary">
+                            <ion-icon name="create" slot="icon-only" color="primary" style="font-size: 32px;"></ion-icon>
+                          </ion-button>
+                          <ion-button (click)="eliminarReporte(reporte)" fill="clear" size="big" color="danger">
+                            <ion-icon name="trash" slot="icon-only" color="danger" style="font-size: 32px;"></ion-icon>
+                          </ion-button>
+
+                      </ion-item>
+                    </ion-list>
+                    <div *ngIf="reportesDeHoy.length === 0">
+                      <p>No se han realizado reportes hoy.</p>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+
+          </ion-grid>
+
+          <!-- Modal para visualizar detalles del reporte -->
+          <ion-modal [isOpen]="modalDetalleAbierto" (ionModalDidDismiss)="cerrarDetalle()">
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-title>Detalles del Reporte</ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="cerrarDetalle()" fill="clear">
+                      <ion-icon name="close" color="dark"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+
+              <ion-content class="modal-content">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title style="color: black;">{{ reporteSeleccionado.direccion }}</ion-card-title>
+                    <div class="categoria-container">
+                      <ion-chip class="categoria-chip">
+                        <ion-label class="categoria-label">{{ reporteSeleccionado.categoria || 'Ninguna' }}</ion-label>
+                      </ion-chip>
+                    </div>
+                  </ion-card-header>
+
+                  <ion-card-content>
+                    <p>{{ reporteSeleccionado.descripcion }}</p>
+                    <img *ngIf="reporteSeleccionado.imagenUrl" [src]="reporteSeleccionado.imagenUrl" alt="Imagen del reporte" style="width: 100%; height: auto;" />
+                  </ion-card-content>
+                </ion-card>
+              </ion-content>
+            </ng-template>
+          </ion-modal>
+
+          <!-- Modal para agregar/editar reporte -->
+          <ion-modal [isOpen]="modalAbierto" (ionModalDidDismiss)="cerrarFormulario()">
+            <ng-template>
+              <ion-header>
+                <ion-toolbar>
+                  <ion-title>{{ isEditMode ? 'Editar Reporte' : 'Agregar Reporte' }}</ion-title>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="cerrarFormulario()" fill="clear">
+                      <ion-icon name="close" color="dark"></ion-icon>
+                    </ion-button>
+                  </ion-buttons>
+                </ion-toolbar>
+              </ion-header>
+
+                <form (ngSubmit)="registrarReporte()" #reporteForm="ngForm">
+                  <div class="report-header" >
+                    <ion-icon name="warning" class="report-icon"></ion-icon>
+                    <h2>{{ isEditMode ? 'Editar Reporte' : '¿Desea reportar una situación vecino?' }}</h2>
+                  </div>
+                  <ion-item>
+                    <ion-label position="floating">Dirección</ion-label>
+                    <ion-input [(ngModel)]="nuevoReporte.direccion" name="direccion" required></ion-input>
+                  </ion-item>
+                  <ion-text color="danger" *ngIf="reporteForm.submitted && !nuevoReporte.direccion">
+                    Dirección es obligatoria.
+                  </ion-text>
+
+                  <ion-item>
+                    <ion-label position="floating">Descripción</ion-label>
+                    <ion-textarea [(ngModel)]="nuevoReporte.descripcion" name="descripcion" required></ion-textarea>
+                  </ion-item>
+                  <ion-text color="danger" *ngIf="reporteForm.submitted && !nuevoReporte.descripcion">
+                    Descripción es obligatoria.
+                  </ion-text>
+
+                  <ion-item>
+                    <ion-label>Categoría</ion-label>
+                    <ion-select [(ngModel)]="nuevoReporte.categoria" name="categoria" required>
+                      <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                  <ion-text color="danger" *ngIf="reporteForm.submitted && !nuevoReporte.categoria">
+                    Categoría es obligatoria.
+                  </ion-text>
+
+                  <ion-item>
+                    <ion-label>Imagen (opcional)</ion-label>
+                    <ion-input type="file" (change)="onFileSelected($event)"></ion-input>
+                  </ion-item>
+
+                  <ion-button type="submit" expand="full" class="submit-button" shape="round">
+                    {{ isEditMode ? 'Actualizar' : 'Reportar' }}
+                  </ion-button>
+                </form>
+            </ng-template>
+          </ion-modal>
+        </div>
+
+
+        <div *ngIf="seccionVisible === 'eventos'">
+            <!-- Card para mostrar los próximos eventos -->
+              <ion-card>
+                <ion-card-header>
+                  <ion-card-title>Próximos Eventos</ion-card-title>
+                </ion-card-header>
+                <ion-card-content>
+                  <p>Hay <strong>{{ conteoEventosProximos }}</strong> eventos definidos para las próximas semanas.</p>
+                </ion-card-content>
+              </ion-card>
+          <ion-grid>
+            <ion-row>
+              <ion-col size="12">
+                <ion-card>
+                  <ion-card-header>
+                    <ion-card-title style="text-align: center;">Asistencia por Evento</ion-card-title>
+                  </ion-card-header>
+                  <ion-card-content>
+                    <div class="chart-container" style="display: flex; justify-content: center; align-items: center; height: 50%;">
+                      <canvas id="myChartAsistentes" class="my-chart" style="max-width: 90%; height: auto;"></canvas>
+                    </div>
+                  </ion-card-content>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+
+        <!-- Sección de Solicitudes -->
+        <div *ngIf="seccionVisible === 'solicitudes'">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Solicitudes</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <h2>Hay un total de <strong>{{ solicitudesPendientes }}</strong> solicitudes sin aceptar por parte del presidente.</h2>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

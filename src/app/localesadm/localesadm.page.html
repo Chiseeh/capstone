@@ -1,0 +1,128 @@
+<ion-content>
+        <!-- Sidebar -->
+        <div class="menu-dashboard" id="sidebar">
+          <div class="top-menu">
+            <div class="logo">
+              <!-- Aquí se agrega el logo -->
+              <img src="assets/images/logo.png" alt="Logo de Junta Vecinal" class="logo-img">
+            </div>
+          </div>
+
+      <!-- Menú -->
+      <div class="menu">
+
+        <div class="enlace" (click)="irAInicio()">
+          <ion-icon name="home" size="small"></ion-icon>
+          <span>Inicio</span>
+        </div>
+
+        <div class="enlace" (click)="irAQuejas()">
+          <ion-icon name="chatbubbles" size="small"></ion-icon>
+          <span>Quejas</span>
+        </div>
+
+        <div class="enlace" (click)="irAEventos()">
+          <ion-icon name="calendar" size="small"></ion-icon>
+          <span>Eventos</span>
+        </div>
+
+        <div class="enlace" (click)="irANoticias()">
+          <ion-icon name="newspaper" size="small"></ion-icon>
+          <span>Noticias</span>
+        </div>
+
+        <div class="enlace" (click)="irAReportarSituacion()">
+          <ion-icon name="alert-circle" size="small"></ion-icon>
+          <span>Reportes</span>
+        </div>
+
+        <div class="enlace" (click)="irAGestionUsuarios()">
+          <ion-icon name="people" size="small"></ion-icon>
+          <span>Usuarios</span>
+        </div>
+
+        <div class="enlace" (click)="irALocales()">
+          <ion-icon name="storefront" size="small"></ion-icon> <!-- Icono para Locales -->
+          <span>Locales</span>
+        </div>
+
+        <div class="enlace" (click)="volverAlLogin()">
+          <ion-icon name="log-out" size="small"></ion-icon>
+          <span>Cerrar Sesión</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="content" style="background-image: url('assets/images/fondo3.png'); background-size: cover; background-repeat: no-repeat; background-position: center; height: 100vh;">
+      <div class="locales-container">
+        <ion-card-header>
+          <ion-card-title style="display: flex; align-items: center; font-size: xx-large; color: #4a4e69;">
+            <ion-icon name="storefront" style="font-size: 1.6em; color: #6d5dfc; margin-right: 10px; font-weight: bold;"></ion-icon>
+            <strong>Administrar Locales</strong>
+          </ion-card-title>
+        </ion-card-header>
+
+        <!-- Contenedor de tarjetas -->
+        <div class="tarjetas-container">
+          <!-- Tarjeta del formulario -->
+          <ion-card class="tarjeta-formulario">
+            <ion-card-header>
+              <ion-card-title>{{ editandoLocal ? 'Editar Local' : 'Agregar Local' }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <form [formGroup]="localForm" (ngSubmit)="agregarLocal()">
+                <ion-item>
+                  <ion-label position="stacked">Nombre del Local</ion-label>
+                  <ion-input formControlName="nombreLocal" type="text" required></ion-input>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Usuario Asociado</ion-label>
+                  <ion-select formControlName="usuarioId" required>
+                    <ion-select-option *ngFor="let usuario of usuarios" [value]="usuario.id">
+                      {{ usuario.nombre }}
+                    </ion-select-option>
+                  </ion-select>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">Descripción</ion-label>
+                  <ion-textarea formControlName="descripcion"></ion-textarea>
+                </ion-item>
+
+                <ion-item>
+                  <ion-label position="stacked">¿Hay Pan?</ion-label>
+                  <ion-toggle formControlName="hayPan"></ion-toggle>
+                </ion-item>
+
+                <ion-button expand="full" type="submit" [disabled]="!localForm.valid" color="success">
+                  {{ editandoLocal ? 'Actualizar Local' : 'Agregar Local' }}
+                </ion-button>
+              </form>
+            </ion-card-content>
+          </ion-card>
+
+          <!-- Tarjeta del listado de locales -->
+          <ion-card class="tarjeta-listado">
+            <ion-card-header>
+              <ion-card-title>Locales Registrados</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>
+              <ion-list>
+                <ion-item *ngFor="let local of locales">
+                  <ion-label>
+                    <h3>{{ local.nombreLocal }}</h3>
+                    <p>{{ local.descripcion }}</p>
+                  </ion-label>
+                  <ion-buttons slot="end">
+                    <ion-button (click)="editarLocal(local)" color="primary">Editar</ion-button>
+                    <ion-button (click)="eliminarLocal(local.id)" color="danger">Eliminar</ion-button>
+                  </ion-buttons>
+                </ion-item>
+              </ion-list>
+            </ion-card-content>
+          </ion-card>
+        </div>
+      </div>
+    </div>
+  </ion-content>

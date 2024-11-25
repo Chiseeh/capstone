@@ -1,0 +1,175 @@
+/* Estilos generales */
+ion-content {
+  --background: white;
+}
+
+#sidebar {
+  position: fixed; /* Fija el sidebar */
+  width: 250px; /* Ajusta el ancho según necesites */
+  height: 100%; /* Ocupa toda la altura de la pantalla */
+  background-color: #f8f9fa; /* Color de fondo */
+  overflow-y: auto; /* Desplazamiento vertical si es necesario */
+  z-index: 1000; /* Asegúrate de que esté por encima de otros elementos */
+  background-color: purple;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+
+  .top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .logo span {
+      font-size: 2em;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .toggle i {
+      font-size: 2.2em;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .menu .enlace {
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    border-radius: 12px;
+    transition: background-color 0.3s;
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+
+    ion-icon {
+      margin-right: 12px;
+    }
+
+    &:hover {
+      background-color: #1a2a3b;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+
+
+.content-wrapper {
+  margin-left: 270px; /* Mueve el contenido hacia la derecha para dar espacio al sidebar */
+  padding: 20px;
+  background-color: #f0f0f0;
+}
+
+.content {
+  margin-left: 250px; /* Deja espacio para el sidebar */
+  padding: 20px; /* Agrega un poco de espacio alrededor del contenido */
+}
+
+/* Barra de búsqueda */
+.search-bar { /* Color de fondo suave para que contraste con el sidebar */
+  padding: 12px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.search-input {
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 8px 16px;
+  font-size: 1em;
+}
+
+/* Tarjetas de estado */
+.status-card {
+  background-color: #ffffff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  transition: transform 0.3s ease;
+}
+
+.status-card:hover {
+  transform: scale(1.05);
+}
+
+.content-background {
+  background-color: #f7f7f7; /* Un gris muy suave */
+  border-radius: 10px; /* Redondear las esquinas */
+  padding: 15px; /* Añade un poco de espacio interno */
+  margin: 10px 0; /* Añade espacio vertical entre el contenido y otros elementos */
+}
+
+
+.ticket-list {
+  padding: 20px;
+}
+
+.ticket-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.3s ease;
+  padding: 20px;
+  margin-bottom: 15px;
+  max-height: 38em;
+}
+
+.ticket-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+
+.categoria-banner {
+  padding: 10px;
+  border-radius: 10px 10px 0 0;
+  color: black;
+}
+
+.categoria-chip {
+  font-weight: bold;
+  display: inline-flex;
+  font-size: 1.2em;
+  color: white;
+  background-color: transparent;
+}
+
+.centered-content p {
+  margin-bottom: 10px;
+}
+
+/* Modal */
+ion-modal {
+  border-radius: 15px;
+}
+
+.adjunto-imagen {
+  max-width: 100%;
+  height: auto;
+  border-radius: 10px;
+}
+
+/* Botones */
+ion-button {
+  margin: 10px 0;
+}
+
+.recortada-imagen {
+  width: 50%; /* Ajusta el tamaño para que no ocupe todo el ancho de la card */
+  height: 120px; /* Puedes ajustar la altura según lo que desees */
+  object-fit: cover; /* Recorta la imagen para que se ajuste al contenedor */
+  border-radius: 8px;
+  margin: auto; /* Centra la imagen y añade espacio alrededor */
+  display: block; /* Asegura que la imagen sea tratada como un bloque para el centrado */
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Asegura que el contenido adicional de la imagen no sobresalga */
+ /* Añade espacio alrededor del contenedor de la imagen */
+}
+

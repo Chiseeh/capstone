@@ -1,0 +1,98 @@
+#sidebar {
+  background-color: purple;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 250px; /* Ajusta el ancho según necesites */
+
+  .top-menu {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+
+    .logo span {
+      font-size: 2em;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .toggle i {
+      font-size: 2.2em;
+      color: #fff;
+      cursor: pointer;
+    }
+  }
+
+  .menu .enlace {
+    display: flex;
+    align-items: center;
+    padding: 14px;
+    border-radius: 12px;
+    transition: background-color 0.3s;
+    color: #fff;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+
+    ion-icon {
+      margin-right: 12px;
+    }
+
+    &:hover {
+      background-color: #1a2a3b;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    }
+  }
+}
+
+
+
+.container {
+  display: flex; /* Usar flexbox para alinear el sidebar y el contenido */
+  margin-right: 50em;
+}
+
+#sidebar {
+  background-color: #33475b;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  width: 250px; /* Ajusta el ancho según necesites */
+  height: 100vh; /* Fija la altura del sidebar */
+}
+
+.content {
+  margin-left: 20px; /* Deja un espacio entre el sidebar y el contenido */
+  padding: 20px; /* Agrega un poco de espacio alrededor del contenido */
+  height: calc(100vh - 56px); /* Ajusta la altura para que no se superponga con el header */
+  overflow-y: auto; /* Permite el desplazamiento si hay mucho contenido */
+  flex: 1; /* Permite que el contenido tome el espacio restante */
+}
+
+.solicitudes-list {
+  margin-top: 20px;
+}
+.solicitud-item {
+  padding: 10px;
+  border-bottom: 1px solid #e0e0e0;
+}
+.solicitud-item:last-child {
+  border-bottom: none;
+}
+ion-label h2 {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+ion-label p {
+  color: #666;
+  font-size: 14px;
+}
+ion-button {
+  margin-top: 10px;
+  --background: #2196F3;
+  --color: white;
+}
+input[type="file"] {
+  margin-top: 10px;
+}
