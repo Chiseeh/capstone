@@ -1,0 +1,168 @@
+ion-content {
+    font-family: 'Poppins', sans-serif;
+    --background: #A58BD4;
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 40px;
+        margin-left: 20px;
+        margin-right: 20px;
+
+        .back_div {
+            font-size: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            ion-title {
+                color: #fff;
+                font-size: 25px;
+                padding-left: 20px;
+                padding: 30px;
+                text-align: center;
+            }
+        }
+    }
+
+    .content_div {
+        background: white;
+        width: 100%;
+        border-top-right-radius: 35px;
+        border-top-left-radius: 35px;
+        margin-top: 25px;
+        padding-top: 30px;
+        padding: 20px;
+        padding-bottom: 50px;
+        height: auto;
+        min-height: calc(100% - 80px);
+
+        .cardData {
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 10px;
+
+            background-color: #E0F7F4;
+            border: 2px solid #A58BD4;
+            border-radius: 20px;
+            height: auto;
+
+            #subject {
+                color: #9f0d9f;
+                background-color: #e6efff;
+                padding: 5px;
+                border-radius: 10px;
+            }
+
+            .box {
+                display: grid;
+                grid-template-columns: 25% 75%;
+                padding-left: 10px;
+                padding-top: 10px;
+                justify-items: center;
+                grid-gap: 10px;
+            }
+
+            .thumbnail {
+                img {
+                    width: 100%;
+                    border-radius: 10px;
+                }
+            }
+
+            .descripcion {
+                justify-self: start;
+
+                span {
+                    color: purple;
+                }
+
+                .paragraph {
+                    text-align: justify;
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}
+
+/* Estilo para Funcionalidades */
+.funcionalidades-card {
+    background-color: #ffffff;
+    color: #333;
+    padding: 3px;
+    margin: 3px auto;
+    border-radius: 20px;
+    /* Bordes más redondeados */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    /* Sombra más profunda */
+    max-width: 90%;
+    border: 2px solid #A58BD4;
+    /* Borde morado */
+}
+
+.funcionalidades-card ion-icon {
+    margin-bottom: 10px;
+    /* Ajusta la distancia entre el icono y el título */
+    font-size: 2em;
+    /* Puedes ajustar el tamaño del icono */
+}
+
+.icono-titulo {
+    display: flex;
+    align-items: center;
+}
+
+
+.funcionalidades-title {
+    font-size: 1.8em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #A58BD4;
+    /* Color morado para el título */
+}
+
+.funcionalidad-col {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    /* Espaciado entre filas */
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 1.5em;
+    border-radius: 16px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    /* Añadir transición para sombras */
+    height: auto;
+    /* Permitir que crezcan según el contenido */
+    width: 100%;
+    /* Ampliar para llenar el espacio */
+    border: 2px solid #A58BD4;
+    /* Borde morado */
+    background-color: rgba(245, 246, 255, 0.9);
+    /* Fondo ligeramente transparente */
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+    /* Efecto de sombra al hacer hover */
+}
+
+.funcionalidad-descripcion {
+    font-size: 0.9em;
+    color: #555;
+    /* Gris oscuro */
+    margin-top: 5px;
+    /* Espaciado superior */
+    background-color: #A58BD4;
+    /* Azul vibrante */
+}

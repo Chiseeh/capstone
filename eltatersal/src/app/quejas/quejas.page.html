@@ -1,64 +1,137 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button (click)="volverAtras()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Quejas</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="top">
+    <div class="back_div">
+      <ion-buttons slot="start">
+        <ion-back-button default-href="#" color="light"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Registro de quejas</ion-title>
+    </div>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <!-- Botón para Volver a Inicio -->
-  <ion-button (click)="volverInicio()" expand="full" color="secondary">
-    Volver a Inicio
-  </ion-button>
+  <div class="content_div">
+    <!-- Cuadro de Bienvenida -->
+    <ion-card class="bienvenida-card">
+      <ion-card-content class="bienvenida-contenido">
+        <ion-icon name="people-circle-outline" size="large" class="bienvenida-icon"></ion-icon>
+        <h2 class="bienvenida-titulo">¡Bienvenido a la Sección de Quejas!</h2>
+        <p class="bienvenida-descripcion">
+          Aquí podrás registrar tus quejas o inquietudes para que el equipo de la Junta Vecinal pueda atenderlas.
+          Podrás consultar el estado de tus quejas y verás las que han sido resueltas.
+        </p>
+        <ion-card-header>
+          <ion-card-title style="text-align: center; font-weight: bold; color: #007bff;">
+            Quejas en Proceso
+          </ion-card-title>
+        </ion-card-header>
+        {{ quejasEnProceso }}
+        <p></p>
+        <ion-card-header>
+          <ion-card-title style="text-align: center; font-weight: bold; color: #28a745;">
+            Quejas Resueltas
+          </ion-card-title>
+        </ion-card-header>
+        <p></p>
+        {{ quejasResueltas }}
+      </ion-card-content>
+    </ion-card>
+    <!-- Mensaje si no hay quejas -->
+    <ion-text color="medium" *ngIf="quejas.length === 0">
+      <p>No hay quejas registradas.</p>
+    </ion-text>
 
-  <!-- Listado de Quejas Registradas -->
+  </div>
+
+  <!-- Listado de Quejas Registradas en Carrusel -->
   <ion-grid *ngIf="quejas.length > 0">
-    <ion-row>
-      <ion-col size="12" *ngFor="let queja of quejas">
-        <div class="categoria-container" [ngStyle]="{ 'background-color': getColorForCategory(queja.categoria) }">
-          <ion-chip class="categoria-chip">
-            <ion-icon [name]="getIconForCategory(queja.categoria)" color="white"></ion-icon>
-            <ion-label class="categoria-label">{{ queja.categoria || 'Ninguna' }}</ion-label>
-          </ion-chip>
-        </div>
+    <div class="carousel-container">
+      <div class="carousel">
+        <ion-col size="12" *ngFor="let queja of quejas">
+          <!-- Contenedor de categoría con borde -->
+          <div class="categoria-container" [ngStyle]="{
+                  'background-color': getColorForCategory(queja.categoria),
+                  'border-color': getBorderColorForCategory(queja.categoria),
+                  'border-width': '2px',
+                  'border-style': 'solid'
+               }">
+            <ion-chip class="categoria-chip">
+              <ion-icon [name]="getIconForCategory(queja.categoria)" style="color: currentColor;"></ion-icon>
+              <ion-label class="categoria-label">{{ queja.categoria || 'Ninguna' }}</ion-label>
+            </ion-chip>
+          </div>
 
-        <ion-card>
-          <ion-card-header>
-            <ion-card-title style="color: black;">{{ queja.titulo }}</ion-card-title>
-          </ion-card-header>
-          <ion-card-content>
-            <p>{{ queja.descripcion }}</p>
-            <p><strong>Categoría:</strong> {{ queja.categoria }}</p>
-            <p><strong>Estado:</strong> {{ queja.estado }}</p>
+          <!-- Tarjeta de queja con bordes en cada sección -->
+          <ion-card class="queja-card" [ngStyle]="{
+                      'border-color': getBorderColorForCategory(queja.categoria),
+                      'border-width': '2px',
+                      'border-style': 'solid'
+                    }">
+            <!-- Título con borde -->
+            <ion-card-header [ngStyle]="{
+                'border-color': getBorderColorForCategory(queja.categoria),
+                'border-bottom-color': '#A58BD4',
+                'border-width': '2px',
+                'border-style': 'solid'
+              }">
+              <ion-card-title style="color: black; text-align: center;">
+                {{ queja.titulo }}
+              </ion-card-title>
+            </ion-card-header>
+            <br>
 
-            <!-- Mostrar la respuesta del admin si existe -->
-            <p *ngIf="queja.respuesta">
-              <strong>Respuesta del Admin:</strong> {{ queja.respuesta }}
-            </p>
+            <!-- Contenido de la tarjeta -->
+            <ion-card-content>
+              <!-- Descripción con borde -->
+              <p [ngStyle]="{
+                'border-color': getBorderColorForCategory(queja.categoria),
+                'border-bottom-color': '#A58BD4',
+                'border-width': '2px',
+                'border-style': 'solid',
+                'padding': '10px'
+              }">
+                <strong>Descripción:</strong> {{ queja.descripcion }}
+              </p>
 
-            <!-- Mostrar el nombre del usuario solo si el usuario actual es admin -->
-            <p *ngIf="usuarioActual && usuarioActual.admin">
-              <strong>Usuario:</strong> {{ queja.nombreUsuario }}
-            </p>
-          </ion-card-content>
-        </ion-card>
+              <!-- Estado con borde -->
+              <p [ngStyle]="{
+                'border-color': getBorderColorForCategory(queja.categoria),
+                'border-bottom-color': '#A58BD4',
+                'border-width': '2px',
+                'border-style': 'solid',
+                'padding': '10px'
+              }">
+                <strong>Estado:</strong> {{ queja.estado }}
+              </p>
 
-        <!-- Botón "Responder Queja" visible solo para administradores -->
-        <ion-button *ngIf="usuarioActual && usuarioActual.admin" (click)="responderQueja(queja)" color="tertiary">
-          Responder Queja
-        </ion-button>
-      </ion-col>
-    </ion-row>
+              <!-- Mostrar archivo adjunto -->
+              <div *ngIf="queja.archivoAdjunto" style="text-align: center;">
+                <strong>Archivo Adjunto:</strong>
+                <div style="display: flex; justify-content: center; flex-wrap: wrap;" class="a-adjunto">
+                  <img *ngIf="queja.archivoAdjunto.startsWith('data:image')" [src]="queja.archivoAdjunto"
+                    alt="Adjunto de queja"
+                    style="max-width: 150px; max-height: 150px; margin: 5px; border-radius: 5px;" />
+
+                  <video *ngIf="queja.archivoAdjunto.startsWith('data:video')" width="320" height="240" controls>
+                    <source [src]="queja.archivoAdjunto" type="video/mp4">
+                    Tu navegador no soporta la etiqueta de video.
+                  </video>
+                </div>
+              </div>
+
+              <!-- Botón de "Ver Detalles" con borde -->
+              <ion-button (click)="verDetalleQueja(queja)" style="margin-top: 10px;" [ngStyle]="{
+                  'border-color': getBorderColorForCategory(queja.categoria),
+                  'border-bottom-color': '#A58BD4',
+                  'border-width': '2px',
+                  'border-style': 'solid'
+                }">
+                Ver Detalles
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </div>
+    </div>
   </ion-grid>
-
-  <!-- Mensaje si no hay quejas -->
-  <ion-text color="medium" *ngIf="quejas.length === 0">
-    <p>No hay quejas registradas.</p>
-  </ion-text>
 
   <!-- Botón flotante para abrir el formulario, solo visible si el usuario no es admin -->
   <ion-fab vertical="bottom" horizontal="end" slot="fixed" *ngIf="usuarioActual && !usuarioActual.admin">
@@ -81,45 +154,153 @@
 
       <ion-content class="modal-content queja-formulario">
         <div class="report-header">
-          <ion-icon name="chatbubble-ellipses-outline" class="report-icon" style="color: #28a745;"></ion-icon>
-          <h2>¿Desea aplicar una queja vecino?</h2>
+          <ion-icon name="chatbubble-ellipses-outline" class="report-icon"></ion-icon>
+          <h2 style="color: #fff;">¿Desea aplicar una queja vecino?</h2>
         </div>
 
-        <ion-card class="form-card queja-form-card">
+        <ion-card class="form-card">
           <ion-card-content>
             <form [formGroup]="nuevaQuejaForm" (ngSubmit)="registrarQueja()">
               <ion-item>
                 <ion-label position="floating">Título</ion-label>
-                <ion-input formControlName="titulo"></ion-input>
+                <ion-input formControlName="titulo" required></ion-input>
               </ion-item>
-              <div *ngIf="nuevaQuejaForm.get('titulo')!.invalid && nuevaQuejaForm.get('titulo')!.touched">
+              <ion-text color="danger"
+                *ngIf="nuevaQuejaForm.get('titulo')!.invalid && nuevaQuejaForm.get('titulo')!.touched">
                 <p class="error-message">El título es obligatorio.</p>
-              </div>
+              </ion-text>
 
               <ion-item>
                 <ion-label position="floating">Descripción</ion-label>
-                <ion-textarea formControlName="descripcion"></ion-textarea>
+                <ion-textarea formControlName="descripcion" required></ion-textarea>
               </ion-item>
-              <div *ngIf="nuevaQuejaForm.get('descripcion')!.invalid && nuevaQuejaForm.get('descripcion')!.touched">
+              <ion-text color="danger"
+                *ngIf="nuevaQuejaForm.get('descripcion')!.invalid && nuevaQuejaForm.get('descripcion')!.touched">
                 <p class="error-message">La descripción es obligatoria.</p>
-              </div>
+              </ion-text>
 
               <ion-item>
                 <ion-label>Categoría</ion-label>
-                <ion-select formControlName="categoria">
+                <ion-select formControlName="categoria" required>
                   <ion-select-option value="seguridad">Seguridad</ion-select-option>
                   <ion-select-option value="evento deportivo">Evento Deportivo</ion-select-option>
                   <ion-select-option value="infraestructura">Infraestructura</ion-select-option>
                 </ion-select>
               </ion-item>
-              <div *ngIf="nuevaQuejaForm.get('categoria')!.invalid && nuevaQuejaForm.get('categoria')!.touched">
+              <ion-text color="danger"
+                *ngIf="nuevaQuejaForm.get('categoria')!.invalid && nuevaQuejaForm.get('categoria')!.touched">
                 <p class="error-message">La categoría es obligatoria.</p>
-              </div>
+              </ion-text>
 
-              <ion-button type="submit" expand="full" class="submit-button queja-submit-button" shape="round" color="primary" [disabled]="nuevaQuejaForm.invalid">
+              <ion-item>
+                <ion-label>Adjuntar Foto o Video</ion-label>
+                <input type="file" (change)="onFileSelected($event)" accept="image/*,video/*" />
+              </ion-item>
+
+              <ion-button type="submit" class="queja-submit-button" shape="round" [disabled]="nuevaQuejaForm.invalid">
                 Registrar Queja
               </ion-button>
             </form>
+          </ion-card-content>
+
+        </ion-card>
+        <div class="emergency-footer">
+          <ion-grid>
+            <ion-row>
+              <ion-col size="4">
+                <ion-card class="emergency-card"
+                  style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <ion-icon name="medical-outline" style="font-size: 24px;" class="iconn"></ion-icon>
+                  <span class="emergency-text">131</span>
+                  <span style="color: black;">Ambulancia</span>
+                </ion-card>
+              </ion-col>
+              <ion-col size="4">
+                <ion-card class="emergency-card"
+                  style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <ion-icon name="flame-outline" style="font-size: 24px;" class="iconn"></ion-icon>
+                  <span class="emergency-text">132</span>
+                  <span style="color: black;">Bomberos</span>
+                </ion-card>
+              </ion-col>
+              <ion-col size="4">
+                <ion-card class="emergency-card"
+                  style="height: 100%; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+                  <ion-icon name="shield-outline" style="font-size: 24px;" class="iconn"></ion-icon>
+                  <span class="emergency-text">(2)2922 3130</span>
+                  <span style="color: black;">P.Cuadrante</span>
+                </ion-card>
+              </ion-col>
+            </ion-row>
+          </ion-grid>
+        </div>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+  <!-- Modal para Detalle de Queja -->
+  <ion-modal [isOpen]="modalDetalleAbierto" (ionModalDidDismiss)="cerrarDetalleQueja()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Detalle de Queja</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarDetalleQueja()">Cerrar</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content>
+        <ion-card *ngIf="quejaSeleccionada" [ngStyle]="{ 'border-color': getBorderColorForCategory(quejaSeleccionada.categoria),
+                                'border-width': '2px',
+                                'border-style': 'solid' }">
+          <ion-card-header>
+            <ion-card-title [ngStyle]="{ 'border-color': getBorderColorForCategory(quejaSeleccionada.categoria),
+            'border-width': '2px',
+            'border-style': 'solid' }" style="color:#A58BD4 ;">{{ quejaSeleccionada.titulo }}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p [ngStyle]="{ 'border-color': getBorderColorForCategory(quejaSeleccionada.categoria),
+            'border-width': '2px',
+            'border-style': 'solid' }" style="color:#A58BD4 ;"><strong>Descripción:</strong> {{
+              quejaSeleccionada.descripcion }}</p>
+            <p [ngStyle]="{ 'border-color': getBorderColorForCategory(quejaSeleccionada.categoria),
+            'border-width': '2px',
+            'border-style': 'solid' }" style="color:#A58BD4 ;"><strong>Categoría:</strong> {{
+              quejaSeleccionada.categoria }}</p>
+            <p [ngStyle]="{ 'border-color': getBorderColorForCategory(quejaSeleccionada.categoria),
+            'border-width': '2px',
+            'border-style': 'solid' }" style="color:#A58BD4 ;"><strong>Estado:</strong> {{ quejaSeleccionada.estado }}
+            </p>
+            <p [ngStyle]="{ 'border-color': getBorderColorForCategory(quejaSeleccionada.categoria),
+            'border-width': '2px',
+            'border-style': 'solid' }" style="color:#A58BD4 ;"><strong>Fecha:</strong> {{
+              quejaSeleccionada.fecha.toDate() | date: 'dd/MM/yyyy' }}</p>
+
+
+            <!-- Contenedor para mostrar archivos adjuntos -->
+            <div *ngIf="quejaSeleccionada.archivoAdjunto" style="text-align: center;">
+              <strong style="color:#A58BD4 ;">Archivo Adjunto:</strong>
+              <div class="a-adjunto">
+                <br>
+                <img *ngIf="quejaSeleccionada.archivoAdjunto.startsWith('data:image')"
+                  [src]="quejaSeleccionada.archivoAdjunto" alt="Adjunto de queja" class="adjunto-imagen"
+                  style="max-width: 150px; max-height: 150px; margin: 5px; border-radius: 5px;" />
+                <video *ngIf="quejaSeleccionada.archivoAdjunto.startsWith('data:video')" controls
+                  style="max-width: 150px; height: auto; margin: 5px;">
+                  <source [src]="quejaSeleccionada.archivoAdjunto" type="video/mp4">
+                  Tu navegador no soporta la etiqueta de video.
+                </video>
+              </div>
+            </div>
+
+            <!-- Mostrar la respuesta solo si existe -->
+            <div *ngIf="quejaSeleccionada.respuesta">
+              <p style="display: flex; justify-content: center; flex-wrap: wrap;" [ngStyle]="{ 'border-color': getBorderColorForCategory(quejaSeleccionada.categoria),
+              'border-width': '2px',
+              'border-style': 'solid' }" style="color:#A58BD4 ;"><strong>Respuesta:</strong> {{
+                quejaSeleccionada.respuesta }}</p>
+            </div>
           </ion-card-content>
         </ion-card>
       </ion-content>

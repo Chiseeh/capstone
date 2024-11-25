@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="#"></ion-back-button>
+      <ion-back-button default-href="noticia"></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center">
       <strong>Registre una noticia</strong>
@@ -21,9 +21,14 @@
       <ion-input type="text" name="txtDescripcion" [(ngModel)]="newNoticia.descripcion" required></ion-input>
     </ion-item>
 
-    <ion-item lines="full">
-      <ion-label position="floating">Fecha de creación de la noticia</ion-label>
-      <ion-input type="date" name="txtFecha" [(ngModel)]="newNoticia.fecha" required></ion-input>
+    <ion-item>
+      <ion-label position="stacked">Subir Imagen</ion-label>
+      <input type="file" accept="image/*" (change)="capturarImagen($event)" [disabled]="newNoticia.video != ''" />
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Subir Video</ion-label>
+      <input type="file" accept="video/*" (change)="capturarVideo($event)" [disabled]="newNoticia.imagen != ''" />
     </ion-item>
   </form>
   <br>

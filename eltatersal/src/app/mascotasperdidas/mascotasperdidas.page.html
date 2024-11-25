@@ -1,0 +1,135 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#" color="A58BD4"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Mascotas Perdidas</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <!-- Mostrar lista de mascotas perdidas -->
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Mascotas Perdidas</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Formulario para agregar una nueva mascota perdida -->
+  <div *ngIf="mostrarFormulario">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Registrar Mascota Perdida</ion-card-title>
+      </ion-card-header>
+      <ion-card-content >
+        <form [formGroup]="mascotaForm" (ngSubmit)="onSubmit()">
+          <ion-item>
+            <ion-label position="floating">Nombre</ion-label>
+            <ion-input formControlName="nombre" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Descripción</ion-label>
+            <ion-input formControlName="descripcion" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Raza</ion-label>
+            <ion-input formControlName="raza" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Fecha de Perdida</ion-label>
+            <ion-datetime formControlName="fechaPerdida" required></ion-datetime>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Ubicación Perdida</ion-label>
+            <ion-input formControlName="ubicacionPerdida" type="text" required></ion-input>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Contacto</ion-label>
+            <ion-input formControlName="contacto" type="text" required></ion-input>
+          </ion-item>
+
+          <ion-item>
+            <input type="file" (change)="onImageSelected($event)" />
+          </ion-item>
+
+          <ion-button expand="full" type="submit" [disabled]="mascotaForm.invalid">Registrar Mascota</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+
+  <!-- Lista de mascotas perdidas (tarjetas) -->
+  <div class="mascotas-perdidas">
+    <div class="card" *ngFor="let mascota of mascotasPerdidas">
+      <img class="card__img" [src]="mascota.imagenAdjunta || 'default-image.jpg'" alt="{{mascota.nombre}}">
+      <div class="card__content">
+        <h1 class="card__header">{{ mascota.nombre }}</h1>
+        <div class="card__text-wrapper">
+          <p class="card__text"><strong>Descripción:</strong> {{ mascota.descripcion }}</p>
+          <p class="card__text"><strong>Raza:</strong> {{ mascota.raza }}</p>
+          <p class="card__text"><strong>Ubicación Perdida:</strong> {{ mascota.ubicacionPerdida }}</p>
+          <p class="card__text"><strong>Fecha de Perdida:</strong> {{ mascota.fechaPerdida | date: 'dd/MM/yyyy' }}</p>
+          <p class="card__text" *ngIf="mascota.contacto"><strong>Contacto:</strong> {{ mascota.contacto }}</p>
+        </div>
+        <!-- Botón para mostrar el formulario de comentarios -->
+        <button class="card__btn" (click)="mostrarFormularioComentario(mascota)">Comentar <span>&rarr;</span></button>
+
+        <!-- Formulario de comentario -->
+        <div *ngIf="mascota.mostrarComentarioFormulario">
+          <ion-input [(ngModel)]="mascota.nuevoComentario" placeholder="Escribe tu comentario..." type="text"></ion-input>
+          <ion-button (click)="agregarComentario(mascota)" expand="full">Agregar Comentario</ion-button>
+        </div>
+
+        <!-- Mostrar lista de comentarios -->
+        <div *ngIf="mascota.comentarios && mascota.comentarios.length > 0">
+          <!-- Aquí muestra los comentarios -->
+          <ul class="comentarios-list">
+            <li *ngFor="let comentario of mascota.comentarios" class="comentario-item">
+              <div class="comentario-header">
+                <strong>Comentario:</strong>
+              </div>
+              <div class="comentario-text">
+                {{ comentario.texto }}
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Botón flotante para abrir el formulario -->
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="toggleFormulario()">
+      <ion-icon name="add-outline"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
+
+<style>
+  .comentarios-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  .comentario-item {
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .comentario-header {
+    font-weight: bold;
+    color: #A58BD4;
+    font-size: 16px;
+  }
+
+  .comentario-text {
+    margin-top: 5px;
+    font-size: 14px;
+    color: #555;
+  }
+</style>

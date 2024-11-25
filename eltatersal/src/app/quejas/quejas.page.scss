@@ -1,310 +1,438 @@
-/* Estilos generales */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 ion-content {
-  --background: #f7f7f7; /* COLOR DE FONDO */
+  font-family: 'Poppins', sans-serif;
+  --background: #A58BD4;
+  .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    .back_div{
+      font-size: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      ion-title {
+        color: #fff;
+        font-size: 25px;
+        padding-left: 20px;
+        padding: 30px;
+        text-align: center;
+      }
+    }
+  }
+
+  .content_div {
+    background: white;
+    width: 100%;
+    border-top-right-radius: 35px;
+    border-top-left-radius: 35px;
+    margin-top: 25px;
+    padding-top: 30px;
+    padding: 20px;
+    padding-bottom: 50px;
+    height: auto;
+    min-height: calc(100% - 80px);
+    .cardData {
+      padding-left: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      margin-bottom: 10px;
+
+      background-color: #E0F7F4;
+      border: 2px solid #A58BD4;
+      border-radius: 20px;
+      height: auto;
+      #subject {
+        color: #9f0d9f;
+        background-color: #e6efff;
+        padding: 5px;
+        border-radius: 10px;
+      }
+      .box {
+        display: grid;
+        grid-template-columns: 25% 75%;
+        padding-left: 10px;
+        padding-top: 10px;
+        justify-items: center;
+        grid-gap: 10px;
+      }
+      .thumbnail {
+        img {
+          width: 100%;
+          border-radius: 10px;
+        }
+      }
+      .descripcion {
+        justify-self: start;
+        span {
+          color: purple;
+        }
+        .paragraph {
+          text-align: justify;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
 }
 
-/***** Estilos del listado de quejas *****/
-.listado-quejas-container {
-  padding: 20px;
-  background-color: #f9f9f9; /* Fondo claro para todo el listado */
+.bienvenida-card {
+  background-color: #E0F7F4; /* Verde menta claro */
+  border-left: 5px solid #A58BD4; /* Borde que combine con el morado */
+  border-radius: 15px;
+  margin: 20px;
+  padding: 15px;
+  text-align: center;
 }
 
-.queja-list {
+.bienvenida-icon {
+  color: #A58BD4;
+  margin-bottom: 10px;
+}
+
+.bienvenida-titulo {
+  font-family: "Poppins", sans-serif;
+  color: #A58BD4;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.bienvenida-descripcion {
+  font-family: "Roboto", sans-serif;
+  color: #7a7a7a;
+  font-size: 0.9rem;
+  margin-top: 0;
+}
+
+/* Ajustes de Estilo General */
+ion-card {
+  border-radius: 15px;  /* Bordes más sutiles */
+  box-shadow: 0 8px 15px rgba(255, 255, 255, 0.885);  /* Sombra más clara */
+  background-color: #ffffff; /* Fondo blanco puro */
+  width: 100%; /* Ajustar el ancho de las tarjetas al 100% del contenedor */
+  max-width: 300px; /* Limitar el tamaño máximo para consistencia */
+  margin: 0 auto; /* Centrar las tarjetas dentro de su contenedor */
+  padding: 15px; /* Añadir padding para más espacio */
+}
+
+.welcome-card {
   display: flex;
   flex-direction: column;
-  gap: 15px; /* Espacio entre tarjetas */
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f4ff; /* Un color lavanda claro que combina con el morado */
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra para un efecto de elevación */
+  width: 90%; /* Ancho para ocupar la mayoría del contenedor */
+  max-width: 800px; /* Tamaño máximo para evitar expansión en pantallas grandes */
+  margin: 20px auto; /* Centrado y margen superior e inferior */
+  border: 2px solid #A58BD4; /* Borde morado */
+
 }
 
-.queja-card {
-  --background: #ffffff; /* Fondo blanco */
-  --border-radius: 15px;
-  --box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
-  padding: 15px;
-  transition: transform 0.3s ease;
-}
-
-.queja-card:hover {
-  transform: translateY(-5px); /* Efecto hover para elevar ligeramente la tarjeta */
-}
-
-.queja-card ion-card-title {
-  font-size: 1.4em;
+/* Título de la Bienvenida */
+.welcome-section h1 {
+  font-family: "Poppins", sans-serif;
+  font-size: 2rem;
   font-weight: bold;
+  color: #A58BD4; /* Color morado claro */
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+/* Texto de bienvenida */
+.welcome-section p {
+  font-size: 1.2rem;
   color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+  line-height: 1.5; /* Espacio entre líneas */
 }
 
-.queja-card ion-card-content p {
-  font-size: 1em;
-  color: #666;
-}
-
-.queja-card ion-card-content strong {
-  color: #28a745; /* Verde para categorías */
-}
-
-/***** Estilos del listado de quejas con la categoría primero *****/
-.queja-item {
+ion-toolbar {
+  font-family: "Poppins", sans-serif;
+  --background: white;
+  --color: #A58BD4;
+  border: 2px solid #E0F7F4;
   border-radius: 10px;
-  border: 1px solid #ccc;
-  padding: 10px;
-  margin: 10px 0;
-  background-color: #fff;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
+
+/* Ajustes adicionales para el título de la toolbar */
+ion-title {
+  font-weight: bold; /* Negrita para destacar el título */
+  text-align: center; /* Centrar el texto del título */
+}
+
+/* Contenedor del carrusel */
+.carousel-container {
+  overflow-x: auto; /* Permite el scroll horizontal */
+  padding: 10px 0;
+  background-color: #f7f7f7; /* Fondo claro para el carrusel */
+}
+
+/* Estilo para las tarjetas en el carrusel */
+.carousel {
+  display: flex;
+  gap: 1rem; /* Espaciado entre tarjetas */
+  padding: 1rem;
+  flex-wrap: nowrap; /* Evita que las tarjetas se rompan en otra fila */
+  scroll-behavior: smooth; /* Desplazamiento suave */
+}
+
+.carousel ion-col {
+  flex: 0 0 auto; /* Asegura que se alineen horizontalmente */
+}
+
+/* Mejorar los títulos de las tarjetas */
+ion-card-header ion-card-title {
+  color: #333; /* Color más oscuro para los títulos */
+  text-align: center; /* Centrar el título */
+  font-weight: bold; /* Hacer el texto más destacado */
+  font-size: 1.2rem; /* Aumentar tamaño del texto */
+}
+
+/* Contenido del ion-card */
+ion-card-content {
+  text-align: center;
+  font-size: 1.1rem; /* Aumenta el tamaño de la descripción */
+  color: #555; /* Color suave para el texto */
+}
+
+/* Estilo de los botones */
+ion-button {
+  margin-top: 10px; /* Espacio entre la tarjeta y el botón */
+  border-radius: 20px; /* Bordes más redondeados para los botones */
+}
+
+/* Otras clases de categoría para asegurar que las tarjetas se destaquen */
 .categoria-container {
   display: flex;
-  align-items: center;
-  margin-bottom: 8px;
+  justify-content: center;
+  margin-bottom: 10px;
 }
 
-.categoria-container ion-icon {
-  font-size: 1.5em;
-  margin-right: 8px;
+/* Estilo de los chips de categoría */
+.categoria-chip {
+  background-color: transparent; /* Fondo de los chips de categoría */
+  border-radius: 50px; /* Redondear los chips */
+  padding: 5px 15px; /* Padding para más espacio interno */
+  color: currentColor; /* Mantén el color acorde a la categoría */
 }
 
-/* Colores para cada categoría */
-.seguridad {
-  color: #dc3545; /* Rojo para seguridad */
+.categoria-label {
+  color: #333; /* Color de texto más oscuro */
+  font-weight: bold; /* Texto en negrita */
 }
 
-.evento_deportivo {
-  color: #28a745; /* Verde para evento deportivo */
+/* Indicadores de estado */
+ion-card .centered-content {
+  text-align: center;
+  font-size: 1.2rem; /* Aumentar el tamaño del número */
+  color: #007bff; /* Cambiar color del texto a azul para "En Proceso" */
 }
 
-.infraestructura {
-  color: #007bff; /* Azul para infraestructura */
+ion-col .centered-content:nth-child(2) {
+  color: #28a745; /* Cambiar color del texto a verde para "Resueltas" */
 }
 
-.categoria-texto {
-  font-weight: bold;
-  font-size: 1.1em;
+ion-content, .main-container {
+  background-color: #f1f1f1 !important; /* Fondo claro para todo el contenido */
 }
 
-/* Estilos para título y descripción */
+/* Tamaño uniforme para las imágenes del formulario */
+.adjunto-imagen {
+  width: 150px;       /* Ancho fijo para todas las imágenes */
+  height: 150px;      /* Altura fija para todas las imágenes */
+  object-fit: cover;  /* Ajusta la imagen para que cubra el área sin deformarse */
+  border-radius: 10px; /* Bordes redondeados para las imágenes */
+  margin: 5px;        /* Espaciado entre las imágenes */
+}
+
+/* Estilo del modal */
+.modal-content {
+  background-color: #f9f9f9; /* Fondo más claro para el modal */
+}
+
+/* Ajustes para el formulario de queja */
+.queja-formulario {
+  padding: 20px;
+}
+
+//* Estilo para la tarjeta de formulario */
+.form-card {
+  background-color: #ffffff; /* Fondo blanco puro para la tarjeta del formulario */
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra para el efecto de elevación */
+  margin: 10px; /* Espaciado */
+  margin: 0 auto; /* Centra el card horizontalmente */
+  border: 2px solid #A58BD4; /* Borde morado */
+}
+/* Mensajes de error */
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-top: 5px; /* Espaciado superior para separación */
+}
+
+/* Estilo para el botón de registrar queja */
+.queja-submit-button {
+  margin-top: 15px; /* Espaciado superior para separación */
+  color: #ffffff;
+}
+
+/* Estilo del modal */
+.modal-content {
+  background-color: #f9f9f9; /* Fondo más claro para el modal */
+}
+
+/* Estilo del modal de Detalle de Queja */
+.modal-content.queja-detalle {
+  background-color: #ffffff; /* Fondo blanco para el modal */
+  border-radius: 15px; /* Bordes redondeados como en otros elementos */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  padding: 20px; /* Espaciado interno */
+}
+
+/* Estilo para el encabezado del modal */
+.modal-content.queja-detalle ion-card-header {
+  background-color: #007bff; /* Color de fondo para el encabezado */
+  color: #ffffff; /* Color del texto */
+  border-radius: 15px 15px 0 0; /* Bordes redondeados en la parte superior */
+}
+
+/* Títulos dentro del modal */
+.modal-content.queja-detalle ion-card-title {
+  font-size: 1.5rem; /* Tamaño de fuente mayor para el título */
+  text-align: center; /* Centrar el título */
+  font-weight: bold; /* Negrita para el título */
+}
+
+/* Contenido del modal */
+.modal-content.queja-detalle ion-card-content {
+  text-align: left; /* Alinear texto a la izquierda */
+  font-size: 1.1em; /* Tamaño de fuente normal para el contenido */
+  color: #333; /* Color de texto */
+  padding: 15px; /* Espaciado interno */
+}
+
+/* Estilo de los textos destacados */
+.modal-content.queja-detalle strong {
+  color: #007bff; /* Color azul para textos importantes */
+}
+
+/* Contenedor para los archivos adjuntos */
+.modal-content.queja-detalle .adjunto-imagen {
+  margin: 5px; /* Margen alrededor de la imagen */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo para el video adjunto */
+.modal-content.queja-detalle video {
+  max-width: 100%; /* Hacer que el video se ajuste al ancho del contenedor */
+  border-radius: 5px; /* Bordes redondeados */
+}
+
+/* Estilo para el detalle de queja */
+.queja-detalle ion-card {
+  border-radius: 15px; /* Bordes redondeados */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+/* Estilo para los indicadores de estado */
+.status-card {
+  border: 2px solid #A58BD4; /* Borde morado */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  max-width: 160px; /* Ajusta el ancho máximo para que sean más pequeños */
+  margin: 0 auto; /* Centra los indicadores */
+
+}
+
+.status-card ion-card-title {
+  font-size: 1rem; /* Disminuye el tamaño de la fuente */
+}
+
+.status-card ion-card-content {
+  font-size: 1rem; /* Disminuye el tamaño de la fuente en el contenido */
+}
+
 h2 {
-  margin: 5px 0;
-  font-size: 1.2em;
-  color: #333;
+  font-family: 'Roboto', sans-serif; /* Cambia a la fuente que prefieras */
+  font-size: 2rem; /* Tamaño más grande para destacar el título */
+  font-weight: bold;
+  color: #A58BD4; /* Color morado, acorde a tu página */
+  text-align: center;
+  margin-bottom: 10px; /* Ajuste de espacio entre el título y la descripción */
 }
 
 p {
-  color: #666;
-  font-size: 1em;
+  font-family: Arial, sans-serif; /* Fuente sencilla para la descripción */
+  font-size: 1rem; /* Tamaño más pequeño para diferenciar del título */
+  color: #4f4f4f; /* Color gris oscuro para un buen contraste */
+  line-height: 1.5; /* Mejora la legibilidad */
+  text-align: center; /* Centra el texto para mantener la consistencia visual */
+  margin-bottom: 20px; /* Espacio entre el párrafo y los elementos siguientes */
 }
 
-/***** Estilos del formulario de quejas *****/
-.queja-formulario {
+ion-chip {
+  border-width: 2px; /* Ajusta el grosor del borde como desees */
+  border-style: solid; /* Asegúrate de que el borde sea sólido */
+}
+
+.queja-card {
+  cursor: pointer;
+  border-style: solid;
+  border-width: 2px;
+  min-height: 300px; /* Altura mínima para garantizar que todas las cartas tengan un tamaño consistente */
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  justify-content: space-between; /* Distribuye el contenido de manera uniforme */
+}
+
+ion-button {
+  --background: #A58BD4;
+  --border-radius: 20px;
+  --color: white;
+  --padding-start: 10px;
+  --padding-end: 10px;
+  --box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-headers {
+
+  font-family: 'Roboto', sans-serif; /* Cambia a la fuente que prefieras */
+  font-size: 2rem; /* Tamaño más grande para destacar el título */
+  font-weight: bold;
+  color: #A58BD4; /* Color morado, acorde a tu página */
   text-align: center;
-  padding: 20px;
+  margin-bottom: 10px; /* Ajuste de espacio entre el título y la descripción */
 }
 
 .report-header {
-  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column; /* Coloca los elementos en una columna */
+  align-items: center; /* Centra horizontalmente */
+  text-align: center; /* Asegura que el texto esté centrado */
+  margin-top: 20px; /* Ajusta el espacio superior si es necesario */
 }
 
 .report-icon {
   font-size: 3.5em;
-  color: #28a745; /* Verde representativo de quejas */
-  margin-bottom: 10px;
+  color: #24ce30;
+  margin-bottom: 10px; /* Espacio entre el ícono y el título */
 }
 
-.queja-formulario h2 {
-  font-size: 1.6em;
-  color: #000000; /* Texto oscuro para mayor legibilidad */
-  margin-bottom: 30px;
+.iconn{
+  color: #A58BD4;
 }
 
-.queja-form-item {
-  --background: #f7f7f7 !important; /* Fondo gris claro */
-  --border-radius: 8px; /* Bordes redondeados */
-  --border-width: 1px !important;
-  --border-color: #ddd !important; /* Bordes gris claro */
-  margin-bottom: 15px; /* Espacio entre inputs */
-}
-
-.queja-form-item ion-input,
-.queja-form-item ion-textarea,
-.queja-form-item ion-select {
-  --padding-start: 10px;
-  border-radius: 8px;
-  --highlight-color-focused: #28a745; /* Verde en foco */
-  color: #333; /* Texto oscuro */
-}
-
-.queja-form-item ion-label {
-  color: #666 !important; /* Etiqueta más suave */
-}
-
-.queja-form-card {
-  border-radius: 15px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1); /* sombra suave */
-  background-color: #ffffff;
-  padding: 20px;
-  max-width: 400px;
-  margin: auto;
-}
-
-.queja-submit-button {
-  --background: #28a745; /* Verde para el botón de registrar queja */
-  color: #ffffff !important;
-  border-radius: 25px;
-  height: 50px;
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.queja-submit-button:hover {
-  background-color: #218838; /* Verde más oscuro en hover */
-}
-
-/***** Estilos adicionales de reportes *****/
-/* Categoria - Contenedor */
-.categoria-container {
-  margin: 15px;
-  padding: 15px;
-  text-align: center;
-  border-radius: 10px;
-  background-color: rgba(255, 255, 255, 0.9); /* Fondo blanco con transparencia */
-  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1); /* Sombra */
-  transition: transform 0.3s ease;
-}
-
-.categoria-container:hover {
-  transform: scale(1.02);
-}
-
-/* Categoria Chip */
-.categoria-chip {
-  display: inline-flex;
-  font-size: 1.2em;
-  color: white;
-  background-color: transparent;
-}
-
-/* Categoria Label */
-.categoria-label {
-  font-weight: bold;
-  color: rgb(255, 255, 255) !important; /*Color de la letra de Categoría en el chip*/
-}
-
-/* Dirección y Descripción */
-.descripcion {
-  padding: 15px;
-  font-size: 1.1em;
-  color: #000000; /* TEXTO DE LA DESCRIPCIÓN */
-}
-
-/* Card general */
-ion-card {
-  border-radius: 15px;  /* Bordes más sutiles */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);  /* Sombra más clara */
-  background-color: #ffffff; /* Fondo blanco puro */
-}
-
-/* Modal */
-ion-modal {
-  border-radius: 15px;
-  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-}
-
-.form-container {
-  padding: 20px;
-  background-color: #ffffff;
-  border-radius: 15px;
-  box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.1); /* sombra suave */
-  max-width: 400px;
-  margin: auto; /* Centrar horizontalmente */
-}
-
-/* Modal Content */
-.modal-content {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  padding: 20px;
-}
-
-/* Modal Header */
-.report-header {
-  margin-bottom: 20px;
-}
-
-.report-icon {
-  font-size: 3.5em;
-  color: #ff5252;
-  margin-bottom: 10px;
-}
-
-h2 {
-  font-size: 1.6em;
-  color: #000000; /* Texto oscuro para mayor legibilidad */
-  margin-bottom: 30px;
-}
-
-/* Input general */
-ion-item {
-  --background: #f7f7f7 !important; /* Fondo gris claro */
-  --border-radius: 8px; /* Bordes redondeados */
-  --border-width: 1px !important;
-  --border-color: #ddd !important; /* Bordes gris claro */
-  margin-bottom: 15px; /* Espacio entre inputs */
-}
-
-/* Inputs específicos */
-ion-input, ion-textarea, ion-select {
-  --padding-start: 10px;
-  border-radius: 8px;
-  --highlight-color-focused: #ff5252; /* Rojo suave en foco */
-  color: #333; /* Texto oscuro */
-}
-
-/* Etiquetas */
-ion-label {
-  color: #666 !important; /* Etiqueta más suave */
-}
-
-/* Botón de envío */
-.submit-button {
-  --background: #28a745;;
-  color: rgb(255, 255, 255) !important;
-  border-radius: 25px;
-  height: 50px;
-  font-size: 1.2em;
-  font-weight: bold;
-  margin-top: 20px;
-  transition: background-color 0.3s ease;
-}
-
-.submit-button:hover {
-  background-color: #ff3b3b; /* Color ligeramente más oscuro en hover */
-}
-
-/* Footer de emergencias */
-.emergency-footer {
-  margin-top: 30px;
-  display: flex;
-  justify-content: space-around;
-}
-
-.emergency-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background-color: #f9f9f9;
-  padding: 15px;
-  border-radius: 12px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: transform 0.2s ease-in-out;
-  width: 90px;
-  text-align: center;
+.a-adjunto {
+  border: 3px solid #A58BD4; /* Borde morado */
 }

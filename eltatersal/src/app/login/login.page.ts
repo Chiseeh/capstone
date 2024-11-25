@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms'; // imports para formulario.
+import { FormGroup, FormControl, Validators, FormBuilder } from '@angular/forms';
 import { AlertController, NavController } from '@ionic/angular';
-import { ApiService } from '../servicios/api.service'; // Importar ApiService
+import { ApiService } from '../servicios/api.service';
 
 @Component({
   selector: 'app-login',
@@ -10,63 +10,53 @@ import { ApiService } from '../servicios/api.service'; // Importar ApiService
 })
 export class LoginPage implements OnInit {
   formulariologin: FormGroup;
-
+  claveType: string = 'password';
 
   constructor(
     public fb: FormBuilder,
     private alertController: AlertController,
     private navCtrl: NavController,
-    private apiService: ApiService // Inyección del servicio
+    private apiService: ApiService
   ) {
     this.formulariologin = this.fb.group({
-      'nombre': new FormControl("", Validators.required),
+      'correo': new FormControl("", [Validators.required, Validators.email]),
       'clave': new FormControl("", Validators.required)
     });
-
-
   }
 
   ngOnInit() {}
+
 
   async Ingresar() {
     const f = this.formulariologin.value;
 
     // Validar si los campos están vacíos
-    if (!f.nombre || !f.clave) {
+    if (!f.correo || !f.clave) {
       const alert = await this.alertController.create({
         header: 'Campos Vacíos',
         message: 'Por favor, complete todos los campos antes de continuar.',
         buttons: ['Aceptar'],
       });
       await alert.present();
-      return; // Detener ejecución si hay campos vacíos
+      return;
     }
 
-    // Llamar a la API para obtener el usuario
-    this.apiService.obtenerUsuarioPorNombreYContra(f.nombre, f.clave).subscribe(async usuario => {
+    try {
+      // Llama a Firebase para autenticación
+      const usuario = await this.apiService.iniciarSesionFirebase(f.correo, f.clave);
       if (usuario) {
-        console.log('Ingresado');
+        console.log('Ingresado con Firebase');
         localStorage.setItem('ingresado', 'true');
-        localStorage.setItem('usuarioActual', JSON.stringify(usuario)); // Guarda el usuario con su ID
+        localStorage.setItem('usuarioActual', JSON.stringify(usuario));
         this.navCtrl.navigateRoot('inicio');
-      } else {
-        const alert = await this.alertController.create({
-          header: 'Datos incorrectos',
-          message: 'Usuario o contraseña incorrectos.',
-          buttons: ['Aceptar'],
-        });
-        await alert.present();
       }
-    }, async error => {
+    } catch (error) {
       const alert = await this.alertController.create({
-        header: 'Error',
-        message: 'Hubo un problema al intentar ingresar.',
+        header: 'Error de inicio de sesión',
+        message: 'Correo o contraseña incorrectos.',
         buttons: ['Aceptar'],
       });
       await alert.present();
-    });
+    }
   }
-  }
-
-
-
+}

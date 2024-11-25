@@ -1,0 +1,117 @@
+<ion-header>
+  <ion-toolbar class="custom-toolbar">
+    <ion-title></ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="custom-background">
+  <!-- Mostrar el perfil del usuario solo si está disponible -->
+  <div *ngIf="usuarioActual" class="card">
+    <div class="img-bx">
+      <img src="https://i.postimg.cc/dQ7zWbS5/img-4.jpg" alt="Perfil del usuario" />
+    </div>
+    <div class="content">
+      <div class="detail">
+        <h2>{{ usuarioActual.nombre }} {{ usuarioActual.apellido }}<br /><span>Su Perfil</span></h2>
+
+        <!-- Agregar los campos adicionales dentro de 'detail' -->
+        <p><strong>RUT:</strong> {{ usuarioActual.rut }}</p>
+        <p><strong>Correo:</strong> {{ usuarioActual.correo }}</p>
+        <p><strong>Dirección:</strong> {{ usuarioActual.direccion }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Detalles adicionales del usuario -->
+  <section class="card">
+    <div class="product-image">
+      <img [src]="qrCodeData" alt="Código QR" draggable="false" />
+    </div>
+    <div class="product-info">
+      <h2>Credencial QR</h2>
+      <p>Este es el código QR generado para su perfil.</p>
+      <div class="price">Código QR</div>
+    </div>
+  </section>
+
+
+  <ion-card *ngIf="scannedData">
+    <ion-card-header>
+      <ion-card-title>Información Escaneada</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      {{ scannedData }}
+    </ion-card-content>
+  </ion-card>
+
+  <!-- Mostrar el formulario solo cuando se haga clic en el botón -->
+  <ion-button expand="block" (click)="toggleForm()">Abrir Formulario</ion-button>
+
+  <div *ngIf="formVisible">
+    <!-- Formulario -->
+    <h1 class="titulo-asamblea">Iniciar una asamblea</h1>
+    <ion-card class="form-card">
+      <form [formGroup]="asambleaForm" (ngSubmit)="crearAsamblea()">
+        <!-- Campos del formulario -->
+        <ion-item>
+          <ion-label position="stacked">Título</ion-label>
+          <ion-input formControlName="titulo" type="text" placeholder="Ingrese el título"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Descripción</ion-label>
+          <ion-textarea formControlName="descripcion" placeholder="Describa la asamblea"></ion-textarea>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Fecha</ion-label>
+          <ion-datetime formControlName="fecha" placeholder="Seleccione una fecha"></ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Hora</ion-label>
+          <ion-input formControlName="hora" type="number" placeholder="Ingrese la hora"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked">Ubicación</ion-label>
+          <ion-input formControlName="ubicacion" type="text" placeholder="Ingrese la ubicación"></ion-input>
+        </ion-item>
+
+        <!-- Botón de Envío -->
+        <ion-button expand="block" type="submit" [disabled]="!asambleaForm.valid">
+          Crear Asamblea
+        </ion-button>
+      </form>
+    </ion-card>
+  </div>
+
+  <!-- Listar Asambleas -->
+  <div *ngIf="asambleas.length > 0">
+    <ion-list>
+      <ion-row class="asambleas-row">
+        <ion-col size="auto" *ngFor="let asamblea of asambleas">
+          <ion-card class="asamblea-card">
+            <ion-card-content>
+              <ion-label class="text-center">
+                <h2>{{ asamblea.titulo }}</h2>
+                <p>{{ asamblea.descripcion }}</p>
+                <small>Hora: {{ asamblea.hora }}:00</small>
+                <p><strong>Ubicación:</strong> {{ asamblea.ubicacion }}</p>
+                <!-- Reemplazado "Generar QR" por "Escanear QR" -->
+                <!-- Botón para escanear QR -->
+              <ion-button expand="block" (click)="toggleQrScan(asamblea.id)" class="qr-button">
+                Escanear QR
+              </ion-button>
+
+                <!-- Mostrar el escáner solo si 'isScanning' es true -->
+              <div *ngIf="asamblea.isScanning">
+                <zxing-scanner
+                  [formats]="allowedFormats"
+                  (scanSuccess)="onCodeResult($event)">
+                </zxing-scanner>
+              </div>
+              </ion-label>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-list>
+  </div>
+</ion-content>

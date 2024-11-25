@@ -14,7 +14,9 @@ import { InicioPage } from './inicio.page';
     FormsModule,
     IonicModule,
     InicioPageRoutingModule
+
   ],
-  declarations: [InicioPage]
+  declarations: [InicioPage],
+
 })
 export class InicioPageModule {}

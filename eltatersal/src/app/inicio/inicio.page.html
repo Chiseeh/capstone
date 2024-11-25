@@ -1,76 +1,163 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title class="title-large">Junta Vecinal</ion-title>
-  </ion-toolbar>
-</ion-header>
+<!-- Definición del ion-menu -->
+<ion-menu contentId="main-content" *ngIf="usuario">
+  <ion-content class="ion-padding">
+    <div class="menu-header">
+      <h6>{{ usuario.correo }}</h6>
+      <h6>Menú</h6>
+    </div>
 
-<ion-content [fullscreen]="true" class="inicio-content">
-  <ion-header collapse="condense">
+    <ion-list>
+      <ion-item button [routerLink]="['/autoridades']" class="menu-item">
+        <ion-icon slot="start" name="people-outline"></ion-icon>
+        <ion-label>Autoridades</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/juntavecino']" class="menu-item">
+        <ion-icon slot="start" name="copy-outline"></ion-icon>
+        <ion-label>Junta de Vecinos</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/tiposervicio']" class="menu-item">
+        <ion-icon slot="start" name="reorder-four-outline"></ion-icon>
+        <ion-label>Servicios</ion-label>
+      </ion-item>
+      <ion-item button [routerLink]="['/noticia']" class="menu-item">
+        <ion-icon slot="start" name="newspaper-outline"></ion-icon>
+        <ion-label>Noticias</ion-label>
+      </ion-item>
+    </ion-list>
+
+    <br>
+    <div class="menu-footer">
+      <h6 style="color: gray;">Configuración</h6>
+      <ion-list>
+        <ion-item button (click)="cerrarSesion()" class="menu-item">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Cerrar sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+</ion-menu>
+
+<div class="ion-page" id="main-content">
+  <ion-header>
     <ion-toolbar>
-      <ion-title size="large">Bienvenido</ion-title>
+      <ion-buttons slot="start">
+        <ion-menu-button></ion-menu-button>
+      </ion-buttons>
+      <ion-title>Menu</ion-title>
     </ion-toolbar>
   </ion-header>
+</div>
+<!-- Agregar el enlace de Google Fonts en el head -->
 
- <ion-card class="intro-card">
-  <div class="intro-container">
-    <img src="/assets/images/tate.PNG" alt="Comunidad" class="intro-icon highlight-icon" />
-    <h2>¡Bienvenido a la Junta de Vecinos El Tattersal!</h2>
-    <p>Conéctate y hagamos de nuestra comunidad un mejor lugar para todos.</p>
+<head>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    .member-name {
+      font-size: 1em;
+      margin-top: 5px;
+      font-family: 'Poppins', sans-serif;
+      /* Usando Poppins */
+      font-weight: 700;
+      /* Peso más grueso */
+      color: #A58BD4;
+      /* Puedes mantener el color aquí o en el HTML */
+    }
+  </style>
+</head>
+
+<ion-content color="light">
+  <div class="header-background" *ngIf="usuario">
+    <ion-buttons slot="start">
+      <ion-menu-button color="light"></ion-menu-button>
+    </ion-buttons>
+    <h4 class="header-title">Hola {{ usuario.nombre }} {{ usuario.apellido }}!</h4>
   </div>
-</ion-card>
 
-  <!-- Grid de acciones principales con estilo personalizado -->
-  <ion-grid>
-    <ion-row>
-      <!-- Botón Registrar Queja -->
-      <ion-col size="6">
-        <ion-card button class="card register-complaint" [routerLink]="['/quejas']">
-          <ion-card-content>
-            <ion-icon name="megaphone-outline" size="large"></ion-icon>
-            <h3>Registrar Queja</h3>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
 
-      <!-- Botón Eventos -->
-      <ion-col size="6">
-        <ion-card button class="card events" [routerLink]="['/evento']">
-          <ion-card-content>
-            <ion-icon name="calendar-outline" size="large"></ion-icon>
-            <h3>Eventos</h3>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
+  <ion-card *ngIf="weatherData" class="tiempo">
+    <ion-card-header>
+      <ion-card-title><ion-icon name="partly-sunny-outline" style="color: #c7a407"></ion-icon> {{ weatherData.location
+        }}</ion-card-title>
+    </ion-card-header>
 
-    <ion-row>
-      <!-- Botón Reportar Situación -->
-      <ion-col size="6">
-        <ion-card button class="card report-situation" [routerLink]="['/reporte']">
-          <ion-card-content>
-            <ion-icon name="alert-circle-outline" size="large" ></ion-icon>
-            <h3>Reportar Situación</h3>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
+    <ion-card-content>
+      Hoy dia tenemos {{ weatherData.currentTemp }}°C
+    </ion-card-content>
+  </ion-card>
 
-      <!-- Botón Noticias -->
-      <ion-col size="6">
-        <ion-card button class="card news" [routerLink]="['/noticia']">
-          <ion-card-content>
-            <ion-icon name="newspaper-outline" size="large"></ion-icon>
-            <h3>Noticias</h3>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+  <!-- Sección Card con Imagen -->
+  <ion-card class="card-carruselsuperior">
+    <div class="image-container">
+      <!-- Sección Carrusel de Imágenes -->
+      <div class="carrusel-card">
+        <div class="intro-container">
+          <div class="carrusel">
+            <div class="carrusel-images" [style.transform]="'translateX(-' + currentSlideIndex * 100 + '%)'">
+              <img *ngFor="let image of images" [src]="image" alt="Imagen" class="carrusel-image" />
+            </div>
+            <button class="prev" (click)="moveSlide(-1)">&#10094;</button>
+            <button class="next" (click)="moveSlide(1)">&#10095;</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ion-card>
 
-  <!-- Botón para cerrar sesión -->
+
+
   <div class="logout-button">
-    <ion-button (click)="cerrarSesion()" expand="full" color="danger">
-      <ion-icon name="log-out-outline" slot="start"></ion-icon>
-      Cerrar Sesión
+    Utilizar solo en caso de de emergencias
+    <ion-button expand="full" color="danger" shape="round" style="font-weight: bold;" (click)="enviarAlerta()"
+      [disabled]="isAlertButtonDisabled">
+      ALERTA
+      <ion-icon name="alert-circle-outline" slot="start"></ion-icon>
     </ion-button>
   </div>
+
+
+  <!-- Mensaje de reposo -->
+  <div *ngIf="mostrarMensajeReposo" class="reposo-mensaje">
+    <ion-text color="danger">
+      El botón de alerta está en reposo. Por favor espera un minuto antes de intentar nuevamente.
+    </ion-text>
+  </div>
+
+  <!-- LOCALES  -->
+
+  <br><br>
+  <h3 class="ion-text-center">Necesitas tener pan en su casa?</h3>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+
+  <div class="locales-container locales-row">
+    <div *ngFor="let local of locales" class="local-card">
+      <div class="local-card-image">
+        <img [src]="local.imagen || '/assets/images/Pan.jpg'" alt="Imagen del local">
+      </div>
+      <div class="local-card-content">
+        <h2 class="local-card-title">{{ local.nombreLocal }}</h2>
+        <p class="local-card-description">{{ local.descripcion }}</p>
+        <p class="local-card-status">
+          <strong>Hay Pan:</strong> {{ local.hayPan ? 'Sí' : 'No' }}
+        </p>
+        <i *ngIf="local.hayPan" class="fas fa-bread-slice pan-icon"></i>
+      </div>
+      <div class="local-card-footer">
+        <ion-button *ngIf="usuarioTieneLocal && local.id === local.id" expand="full" color="tertiary" shape="round" (click)="toggleHayPan(local)">
+          Cambiar Pan
+        </ion-button>
+        <a  class="local-card-link">Read more</a>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Muestra un mensaje si no hay locales -->
+  <div *ngIf="locales.length === 0">
+    <p>No hay locales disponibles en este momento.</p>
+  </div>
+
+
+  <!-- FIN DE LOCALES  -->
 </ion-content>

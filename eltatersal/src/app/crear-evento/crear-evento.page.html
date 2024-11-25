@@ -8,19 +8,20 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <form>
+  <form (ngSubmit)="crearEvento()" #eventoForm="ngForm">
     <ion-item lines="full">
       <ion-label position="floating">Nombre del evento</ion-label>
-      <ion-input type="text" name="txtNombre" [(ngModel)]="newEvento.nombreEvento" required></ion-input>
+      <ion-input type="text" [(ngModel)]="newEvento.nombreEvento" name="nombreEvento" required></ion-input>
     </ion-item>
 
     <ion-item lines="full">
       <ion-label position="floating">Descripción del evento</ion-label>
-      <ion-input type="text" name="txtDescripcion" [(ngModel)]="newEvento.descripcion" required></ion-input>
+      <ion-input type="text" [(ngModel)]="newEvento.descripcion" name="descripcion" required></ion-input>
     </ion-item>
 
     <ion-item>
-      <ion-select label="Evento" [(ngModel)]="newEvento.tipoEvento"  name="cbxCategoria" required>
+      <ion-label>Tipo de Evento</ion-label>
+      <ion-select [(ngModel)]="newEvento.tipoEvento" name="tipoEvento" required>
         <ion-select-option value="Reuniones Mensuales">Reuniones Mensuales</ion-select-option>
         <ion-select-option value="Talleres y Charlas">Talleres y Charlas</ion-select-option>
         <ion-select-option value="Actividades Recreativas">Actividades Recreativas</ion-select-option>
@@ -34,13 +35,18 @@
 
     <ion-item lines="full">
       <ion-label position="floating">Fecha de Inicio</ion-label>
-      <ion-input type="date" [(ngModel)]="newEvento.horaInicio" name="txtDate" required></ion-input>
+      <ion-datetime display-format="yyyy-MM-dd" [(ngModel)]="newEvento.horaInicio" name="horaInicio" required></ion-datetime>
     </ion-item>
 
-    <br>
+
+    <!-- imagen -->
+    <ion-item lines="full">
+      <ion-input type="file" (change)="capturarImagen($event)" #imageProduct name="txtImagen"></ion-input>
+    </ion-item>
+
     <ion-row>
       <ion-col>
-        <ion-button (click)="crearEvento()" expand="block">Crear Evento</ion-button>
+        <ion-button type="submit" expand="block" [disabled]="!eventoForm.form.valid">Crear Evento</ion-button>
       </ion-col>
     </ion-row>
   </form>

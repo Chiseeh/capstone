@@ -1,23 +1,35 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>registro</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="registro-content">
+  <!-- Sección morada con icono y diseño -->
+  <div class="header-background">
+    <div class="icon-wrapper">
+      <ion-icon name="person-add-outline" class="header-icon"></ion-icon>
+    </div>
+    <h2 class="header-title">Registro Junta Vecinal</h2>
+    <p class="header-subtitle">Completa los siguientes campos:</p>
+  </div>
 
-<ion-content [fullscreen]="true">
+  <!-- Formulario de Registro -->
   <ion-card>
-    <ion-card-header style="text-align: center;">
-      <ion-card-title>registro</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
       <form [formGroup]="formularioregistro">
-
         <ion-item>
           <ion-label position="floating">Nombre</ion-label>
           <ion-input formControlName="nombre"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input formControlName="apellido"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">RUT</ion-label>
+          <ion-input formControlName="rut"></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Correo</ion-label>
+          <ion-input formControlName="correo" type="email"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -25,16 +37,33 @@
           <ion-input formControlName="clave" type="password"></ion-input>
         </ion-item>
 
-      <ion-item>
-        <ion-label position="floating">Confirmar Clave</ion-label>
-        <ion-input formControlName="confirmarclave" type="password"></ion-input>
-      </ion-item>
-    </form>
-      <br>
-      <div class="button-container">
-        <ion-button (click)="guardar()">Registarse</ion-button>
-      </div>
+        <ion-item>
+          <ion-label position="floating">Confirmar Clave</ion-label>
+          <ion-input formControlName="confirmarclave" type="password"></ion-input>
+        </ion-item>
+
+        <!-- Campo para Dirección -->
+        <ion-item>
+          <ion-label position="floating">Dirección</ion-label>
+          <ion-input formControlName="direccion"></ion-input>
+        </ion-item>
+
+        <!-- Campo para Firma -->
+        <ion-item>
+          <ion-label position="floating">Firma</ion-label><br>
+          <input type="file" accept="image/*" (change)="onFileSelected($event)" />
+        </ion-item>
+      </form>
+
+      <!-- Botón de Registro -->
+      <ion-button color="#f7f7f7" expand="block" (click)="guardar()" class="custom-button">
+        Registrarse
+      </ion-button>
     </ion-card-content>
   </ion-card>
-</ion-content>
 
+  <!-- Enlace para volver a iniciar sesión -->
+  <div class="login-link">
+    <p>¿Ya tienes cuenta? <a [routerLink]="['/login']">Iniciar Sesión</a></p>
+  </div>
+</ion-content>

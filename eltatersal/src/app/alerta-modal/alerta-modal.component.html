@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Urgente Alerta!!!</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="cerrarModal()" color="danger" shape="round">
+        Cerrar
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="alert-content">
+  <ion-card class="alert-card">
+    <ion-card-header>
+      <ion-card-title class="center-title">
+        Alerta Vecinal
+      </ion-card-title>
+      <div class="alert-icon-container">
+        <ion-icon name="alert-circle" class="alert-icon"></ion-icon>
+      </div>
+    </ion-card-header>
+
+    <ion-card-content>
+      <div class="alert-box">
+        <div *ngFor="let line of mensaje" class="alert-line">
+          <p>{{ line }}</p>
+        </div>
+      </div>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

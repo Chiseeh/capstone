@@ -49,6 +49,36 @@ const routes: Routes = [
     path: 'crear-noticias',
     loadChildren: () => import('./crear-noticias/crear-noticias.module').then( m => m.CrearNoticiasPageModule)
   },
+  {
+    path: 'documentos',
+    loadChildren: () => import('./documentos/documentos.module').then( m => m.DocumentosPageModule)
+  },
+  {
+    path: 'documentos2',
+    loadChildren: () => import('./documentos2/documentos2.module').then( m => m.Documentos2PageModule)
+  },
+  {
+    path: 'autoridades',
+    loadChildren: () => import('./autoridades/autoridades.module').then( m => m.AutoridadesPageModule)
+  },
+  {
+    path: 'juntavecino',
+    loadChildren: () => import('./juntavecino/juntavecino.module').then( m => m.JuntavecinoPageModule)
+  },
+  {
+    path: 'tiposervicio',
+    loadChildren: () => import('./tiposervicio/tiposervicio.module').then( m => m.TiposervicioPageModule)
+  },
+  {
+    path: 'mascotasperdidas',
+    loadChildren: () => import('./mascotasperdidas/mascotasperdidas.module').then( m => m.MascotasperdidasPageModule)
+  },
+  {
+    path: 'asistencia',
+    loadChildren: () => import('./asistencia/asistencia.module').then( m => m.AsistenciaPageModule)
+  },
+
+
 ];
 
 @NgModule({

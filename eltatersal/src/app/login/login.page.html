@@ -1,20 +1,20 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-title>Inicia sesion vecino</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content [fullscreen]="true" class="login-content">
+  <!-- Sección morada con icono y diseño -->
+  <div class="header-background">
+    <div class="icon-wrapper">
+      <ion-icon name="people-circle-outline" class="header-icon"></ion-icon>
+    </div>
+    <h2 class="header-title">Login Junta Vecinal</h2>
+    <p class="header-subtitle">Ingresa tus credenciales para continuar:</p>
+  </div>
 
-<ion-content [fullscreen]="true">
+  <!-- Formulario de Login -->
   <ion-card>
-    <ion-card-header style="text-align: center;">
-      <ion-card-title>Login</ion-card-title>
-    </ion-card-header>
     <ion-card-content>
       <form [formGroup]="formulariologin">
-
         <ion-item>
-          <ion-label position="floating">Nombre</ion-label>
-          <ion-input formControlName="nombre"></ion-input>
+          <ion-label position="floating">Correo</ion-label>
+          <ion-input formControlName="correo" type="email"></ion-input>
         </ion-item>
 
         <ion-item>
@@ -22,21 +22,21 @@
           <ion-input formControlName="clave" type="password"></ion-input>
         </ion-item>
       </form>
-      <br>
-      <div class="button-container">
-        <ion-button (click)="Ingresar()">Ingreso</ion-button>
-      </div>
-      <div class="button-container">
-        <span color="primary" [routerLink]="['/registro']">¿Olvidaste tu Clave?</span>
+
+      <!-- Botón de Ingresar -->
+      <ion-button color="#fafafa" expand="block" (click)="Ingresar()" class="custom-button">
+        Ingresar
+      </ion-button>
+
+      <!-- Enlace de Olvidar Clave -->
+      <div class="forgot-password">
+        <a color="primary" [routerLink]="['/registro']">¿Olvidaste tu Clave?</a>
       </div>
     </ion-card-content>
   </ion-card>
-</ion-content>
 
-<ion-footer>
-  <ion-toolbar color="primary">
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/registro']">Registrarse</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>
+  <!-- Enlace de Registrarse -->
+  <div class="register-link">
+    <p>¿No tienes una cuenta? <a color="primary" [routerLink]="['/registro']">Registrarse</a></p>
+  </div>
+</ion-content>

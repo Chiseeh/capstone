@@ -1,22 +1,41 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button default-href="#"></ion-back-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center">Novedades de Eventos</ion-title>
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/crear-evento']">AGREGAR</ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="top">
+    <div class="back_div">
+      <ion-buttons slot="start">
+        <ion-back-button default-href="#" color="light"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Eventos Disponibles</ion-title>
+    </div>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-list>
-    <ion-item *ngFor="let e of eventos" [routerLink]="['/detalle', e.idEvento]">
-      <ion-label> {{ e.nombreEvento }} </ion-label>
-      <ion-label>{{ e.descripcion }}</ion-label>
-      <ion-label>{{ e.tipoEvento }}</ion-label>
-      <ion-label>{{ e.horaInicio }}</ion-label>
-    </ion-item>
-  </ion-list>
+  <div class="content_div">
+    <!-- Cuadro de Bienvenida -->
+    <ion-card class="bienvenida-card">
+      <ion-card-content class="bienvenida-contenido">
+        <ion-icon name="people-circle-outline" size="large" class="bienvenida-icon"></ion-icon>
+        <h2 class="bienvenida-titulo">¡Bienvenidos vecinos!</h2>
+        <p class="bienvenida-descripcion">
+          Explora los diferentes eventos sobre nuestra comunidad y novedades locales.
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <div>
+      <div class="cardData" *ngFor="let e of eventos">
+        <span id="subject">{{ e.nombreEvento }}</span>
+        <div class="box">
+          <div class="thumbnail">
+            <img [src]="e.imagen" />
+          </div>
+          <div class="descripcion">
+            <ion-icon color="danger" name="time-outline"></ion-icon> <span> {{ e.horaInicio | date:"yyyy-MM-dd" }}</span>
+            <p class="paragraph">{{ e.tipoEvento }}</p>
+            <p class="paragraph">{{ e.descripcion }}</p>
+            <p class="paragraph"> Asistencia confirmada: {{ e.asistentesCount }}</p>
+          </div>
+          <ion-button color="tertiary" (click)="confirmarAsistencia(e.id)">Confirmar Asistencia</ion-button>
+        </div>
+      </div>
+    </div>
+  </div>
 </ion-content>

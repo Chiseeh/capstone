@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
-
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
 import { ReportePageRoutingModule } from './reporte-routing.module';
 import { ReportePage } from './reporte.page';
 
@@ -11,7 +11,8 @@ import { ReportePage } from './reporte.page';
     CommonModule,
     FormsModule,
     IonicModule,
-    ReportePageRoutingModule
+    ReportePageRoutingModule,
+
   ],
   declarations: [ReportePage]
 })

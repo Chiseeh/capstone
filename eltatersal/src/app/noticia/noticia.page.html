@@ -1,40 +1,78 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-back-button default-href="#"></ion-back-button>
-    </ion-buttons>
-    <ion-title class="ion-text-center">
-      <strong>Publicación de noticias</strong>
-    </ion-title>
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/crear-noticias']"> Crear Noticia </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+<ion-content>
+  <div class="top">
+    <div class="back_div">
+      <ion-buttons slot="start">
+        <ion-back-button default-href="#" color="light"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Noticias</ion-title>
+    </div>
+  </div>
 
-<ion-content [fullscreen]="true" color="light">
-  <ion-grid>
-    <ion-row>
-      <ion-col>
-        <ion-card *ngFor="let n of noticias">
-          <ion-card-header>
-            <ion-card-title class="ion-text-center">{{ n.titulo }}</ion-card-title>
-          </ion-card-header>
+  <div class="content_div">
+    <!-- Cuadro de Bienvenida -->
+    <ion-card *ngIf="ufData" class="bienvenida-card">
+      <ion-card-content class="bienvenida-contenido">
+        <ion-icon color="warning" name="cash-outline"></ion-icon>
+        <h2 class="uf-title">Valor actual de la UF</h2>
+        <p class="uf-value">${{ ufData.serie[0].valor | number:'1.0-0' }}</p>
+        <p class="uf-date">{{ ufData.serie[0].fecha | date }}</p>
+      </ion-card-content>
+    </ion-card>
 
-          <ion-card-content>
-            {{ n.descripcion }}
-          </ion-card-content>
+    <!-- Contenido de Noticias -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <ion-card *ngFor="let n of noticias" class="news-card">
+            <ion-card-content *ngIf="n.imagen">
+              <img [src]="n.imagen" class="imagen-noticia" />
+            </ion-card-content>
 
-          <ion-card-content class="ion-text-center">
-            <ion-label>{{ n.fecha }}</ion-label>
-          </ion-card-content>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+            <ion-card-content *ngIf="n.video">
+              <video controls [src]="n.video" class="video-noticia" style="width: 100%;"></video>
+            </ion-card-content>
+
+            <ion-card-header>
+              <ion-card-title class="titulo-noticia">{{ n.titulo }}</ion-card-title>
+            </ion-card-header>
+
+            <ion-card-content class="descripcion-noticia">
+              <div *ngIf="n.verMas">
+                {{ n.descripcion }}
+              </div>
+              <div *ngIf="!n.verMas">
+                {{ n.descripcion | slice: 0: 100 }}...
+              </div>
+            </ion-card-content>
+
+            <ion-card-content class="fecha-noticia">
+              <ion-label>{{ n.fecha.toDate() | date: 'dd/MM/yyyy, h:mm a' }}</ion-label>
+            </ion-card-content>
+
+            <ion-card-content class="boton-ver-mas">
+              <ion-button (click)="toggleVerMas(n)" expand="block">
+                {{ n.verMas ? 'Leer menos' : 'Leer más' }}
+              </ion-button>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <div>
+      <ion-card>
+        <h2 class="ion-text-center">Ferias del Bosque</h2>
+        <ion-item *ngFor="let feria of ferias">
+          <ion-label>
+            <h3>{{ feria.nombreFeria }}</h3>
+            <p>Calle Principal: {{ feria.callePrincipal }}</p>
+            <p>Calles: {{ feria.calleInicial }} y {{ feria.calleFinal }}</p>
+            <p></p>
+            <p>De: {{ feria.diasFuncionamiento }} desde {{ feria.horarioFuncionamiento }}</p>
+            <p></p>
+          </ion-label>
+        </ion-item>
+      </ion-card>
+    </div>
+  </div>
 </ion-content>
-
-
-
-
-

@@ -1,0 +1,154 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+ion-content {
+  font-family: 'Poppins', sans-serif;
+  --background: #A58BD4;
+  .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    .back_div{
+      font-size: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      ion-title {
+        color: #fff;
+        font-size: 25px;
+        padding-left: 20px;
+        padding: 30px;
+        text-align: center;
+      }
+    }
+  }
+
+  .content_div {
+    background: white;
+    width: 100%;
+    border-top-right-radius: 35px;
+    border-top-left-radius: 35px;
+    margin-top: 25px;
+    padding-top: 30px;
+    padding: 20px;
+    padding-bottom: 50px;
+    height: auto;
+    min-height: calc(100% - 80px);
+    .cardData {
+      padding-left: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      margin-bottom: 10px;
+
+      background-color: #E0F7F4;
+      border: 2px solid #A58BD4;
+      border-radius: 20px;
+      height: auto;
+      #subject {
+        color: #9f0d9f;
+        background-color: #e6efff;
+        padding: 5px;
+        border-radius: 10px;
+      }
+      .box {
+        display: grid;
+        grid-template-columns: 25% 75%;
+        padding-left: 10px;
+        padding-top: 10px;
+        justify-items: center;
+        grid-gap: 10px;
+      }
+      .thumbnail {
+        img {
+          width: 100%;
+          border-radius: 10px;
+        }
+      }
+      .descripcion {
+        justify-self: start;
+        span {
+          color: purple;
+        }
+        .paragraph {
+          text-align: justify;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
+
+
+.bienvenida-card {
+  background-color: #E0F7F4; /* Verde menta claro */
+  border-left: 5px solid #A58BD4; /* Borde que combine con el morado */
+  border-radius: 15px;
+  margin: 20px;
+  padding: 15px;
+  text-align: center;
+}
+
+.bienvenida-icon {
+  color: #A58BD4;
+  margin-bottom: 10px;
+}
+
+.bienvenida-titulo {
+  font-family: "Poppins", sans-serif;
+  color: #A58BD4;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.bienvenida-descripcion {
+  font-family: "Roboto", sans-serif;
+  color: #7a7a7a;
+  font-size: 0.9rem;
+  margin-top: 0;
+}
+
+
+
+
+ion-toolbar {
+  --background: #A58BD4; /* Fondo morado */
+  --color: white; /* Color del texto */
+  border: 2px solid #E0F7F4; /* Borde claro */
+}
+
+ion-content {
+  background-color: rgb(245, 246, 255); /* Fondo claro */
+}
+
+.document-list {
+  margin-bottom: 24px; /* Espacio entre listas */
+  background: #fff; /* Fondo blanco para la lista de documentos */
+  border-radius: 12px;
+  padding: 16px;
+  border: 2px solid #A58BD4; /* Borde morado */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Sombra */
+}
+
+.service-item {
+  background: #fff; /* Fondo blanco para los ítems de servicio */
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15); /* Sombra */
+  font-size: 18px; /* Tamaño de fuente */
+  --padding-start: 12px;
+  --padding-end: 12px;
+}
+
+.service-item ion-icon {
+  font-size: 24px; /* Tamaño del icono */
+  color: #6a1b9a; /* Color del icono morado */
+}
+
+ion-button {
+  margin-top: 8px;
+  --background: #A58BD4; /* Color morado para los botones */
+  --color: white; /* Color del texto del botón */
+}

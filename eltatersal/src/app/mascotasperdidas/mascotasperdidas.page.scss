@@ -1,0 +1,117 @@
+/* Reset y estilo global */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%; /* 10px/16px */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding: 6rem;
+  background-color: #E0F7F4 !important;
+  font-family: "Inter", sans-serif;
+}
+
+
+/* Contenedor para las tarjetas de mascotas perdidas */
+.mascotas-perdidas {
+  display: flex;
+  overflow-x: auto; /* Permite desplazamiento horizontal */
+  padding: 2rem;
+  gap: 2rem; /* Espaciado entre tarjetas */
+}
+
+/* Estilos para las tarjetas */
+.card {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease-in-out;
+  flex-shrink: 0; /* Evita que las tarjetas se encojan */
+  width: 300px; /* Ancho fijo para cada tarjeta */
+  border: 2px solid #A58BD4; /* Borde morado */
+
+}
+
+.card:hover {
+  transform: translateY(-5px);
+}
+
+.card__img {
+  display: block;
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.card__content {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1; /* Esto hace que el contenido crezca y ocupe el espacio disponible */
+}
+
+.card__header {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 1rem;
+}
+
+.card__text-wrapper {
+  margin-bottom: 1.5rem;
+}
+
+.card__text {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.card__btn {
+  width: 100%;
+  padding: 1rem;
+  font-size: 1.2rem;
+  color: #fff;
+  background-color: #3363ff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  text-align: center;
+  transition: background-color 0.3s;
+  margin-top: auto; /* Empuja el botón hacia el fondo */
+}
+
+.card__btn {
+  background-color: #A58BD4;
+}
+
+/* Botón flotante */
+ion-fab-button {
+  --background: #3363ff;
+  --border-radius: 50%;
+  --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+ion-toolbar {
+  font-family: "Poppins", sans-serif;
+  --background: white;
+  --color: #A58BD4;
+  border: 2px solid #E0F7F4;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}

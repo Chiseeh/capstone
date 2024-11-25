@@ -1,0 +1,4 @@
+// capacitor.settings.gradle
+rootProject.name = 'ELTATERSAL'
+
+include ':app'

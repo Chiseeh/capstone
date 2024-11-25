@@ -1,0 +1,83 @@
+<ion-content [fullscreen]="true">
+  <div class="top">
+    <div class="back_div">
+      <ion-buttons slot="start">
+        <ion-back-button default-href="#" color="light"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Documentos</ion-title>
+    </div>
+  </div>
+
+  <div class="content_div">
+    <ion-card class="bienvenida-card">
+      <ion-card-content class="bienvenida-contenido">
+        <h2 class="bienvenida-titulo">¡Necesita alguna ayuda!</h2>
+        <p class="bienvenida-descripcion">
+          Le presentamos un acceso rapido para poder pedir los diferentes tipos de documentos que necesite.
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <!-- Formulario para ingresar credenciales -->
+    <ion-item *ngIf="esPresidenteOAdmin">
+      <ion-label position="floating">Correo Presidente</ion-label>
+      <ion-input [(ngModel)]="correoPresidente" type="email" required></ion-input>
+    </ion-item>
+    <ion-item *ngIf="esPresidenteOAdmin">
+      <ion-label position="floating">Contraseña Presidente</ion-label>
+      <ion-input [(ngModel)]="contrasenaPresidente" type="password" required></ion-input>
+    </ion-item>
+    <ion-button *ngIf="esPresidenteOAdmin" expand="full" (click)="autorizar()">Autorizar</ion-button>
+
+    <!-- Certificado de Residencia -->
+    <ion-list class="document-list">
+      <ion-item class="service-item">
+        <ion-icon slot="start" name="document-outline"></ion-icon>
+        <ion-label>Certificado de Residencia</ion-label>
+        <ion-button (click)="solicitarDocumento()" expand="full">
+          Solicitar
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+    <!-- Acta de Reunion -->
+    <ion-list class="document-list">
+      <ion-item class="service-item">
+        <ion-icon slot="start" name="document-outline"></ion-icon>
+        <ion-label>Acta de Reunión</ion-label>
+        <ion-button (click)="solicitarActaReunion()" expand="full">
+          Solicitar
+        </ion-button>
+      </ion-item>
+    </ion-list>
+
+    <!-- Solicitudes de documentos -->
+    <ion-list *ngFor="let solicitud of solicitudes" class="document-list">
+      <ion-item class="service-item">
+        <ion-icon slot="start" name="person-outline"></ion-icon>
+        <ion-label>
+          <h2>{{ solicitud.usuario?.nombre }}</h2>
+          <p>Documento solicitado: {{ solicitud.documentType }}</p>
+          <p>Fecha: {{ solicitud.fecha?.toDate() | date: 'dd/MM/yyyy' }}</p>
+
+          <!-- Botón para descargar el documento -->
+          <ion-button *ngIf="solicitud.aceptada && solicitud.documentoSubido" (click)="descargarDocumento(solicitud)"
+            expand="full">
+            Descargar Documento
+          </ion-button>
+          <!-- Botón de autorizar que solo ve el admin -->
+          <!-- Botón para subir documento si el usuario es presidente o admin y no se ha subido aún -->
+          <ion-button *ngIf="esPresidenteOAdmin && !solicitud.documentoSubido"
+            (click)="subirDocumentoParaSolicitud(solicitud)" expand="full" [disabled]="isButtonDisabled">
+            Subir Documento
+          </ion-button>
+        </ion-label>
+      </ion-item>
+    </ion-list>
+
+    <ion-toast [isOpen]="toastOpen" message="Solicitud enviada con éxito." duration="2000"
+      (didDismiss)="toastOpen = false">
+    </ion-toast>
+
+  </div>
+</ion-content>

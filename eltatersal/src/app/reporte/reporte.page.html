@@ -1,41 +1,127 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="primary">
-    <ion-buttons slot="start">
-      <ion-button (click)="volverAtras()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title>Reportes</ion-title>
-  </ion-toolbar>
-</ion-header>
+<ion-content style="background: #A58BD4;">
+  <div class="top">
+    <div class="back_div">
+      <ion-buttons slot="start">
+        <ion-back-button default-href="#" color="light"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Reportes</ion-title>
+    </div>
+  </div>
 
-<ion-content [fullscreen]="true">
-  <ion-grid *ngIf="reportes.length > 0">
-    <ion-row>
-      <ion-col size="12" *ngFor="let reporte of reportes">
-        <div class="categoria-container" [ngStyle]="{ 'background-color': getColorForCategory(reporte.categoria) }">
-          <ion-chip class="categoria-chip">
-            <ion-icon [name]="getIconForCategory(reporte.categoria)" color="white"></ion-icon>
-            <ion-label class="categoria-label">{{ reporte.categoria || 'Ninguna' }}</ion-label>
-          </ion-chip>
-        </div>
+  <div class="content_div">
+    <!-- Cuadro de Bienvenida -->
+    <ion-card class="bienvenida-card">
+      <ion-card-content class="bienvenida-contenido">
+        <h2 class="bienvenida-titulo">¡Bienvenidos vecinos!</h2>
+        <p class="bienvenida-descripcion">
+          Aquí podrás reportar situaciones sospechosas o que pongan en peligro a la comunidad. <br> <br>
+          Se demuestran los reportes activos realizados por los vecinos.
+        </p>
+      </ion-card-content>
+    </ion-card>
 
-        <ion-card>
+    <div>
+      <div class="cardData">
+        <ion-card-header>
+          <ion-card-title style="text-align: center; font-weight: bold; color: #007bff;">
+            Reportes Activos
+          </ion-card-title>
+        </ion-card-header>
+        <ion-card-content style="text-align: center; font-size: 1.2rem;">
+          {{ reportesActivos }}
+        </ion-card-content>
+      </div>
+    </div>
+
+    <ion-text color="medium" *ngIf="reportes.length === 0">
+      <p>No hay reportes registrados.</p>
+    </ion-text>
+
+    <div class="reportes-carousel">
+      <div class="reportes-container">
+        <ion-card *ngFor="let reporte of reportes" class="card-reporte">
           <ion-card-header>
-            <ion-card-title style="color: black;">{{ reporte.direccion }}</ion-card-title> <!-- AGREGUE ESTILO CSS DIRECTO AL HTML POR PROBLEMAS CON CSS -->
+            <div class="categoria-container" [ngStyle]="{ 'background-color': getColorForCategory(reporte.categoria) }">
+              <ion-chip class="categoria-chip">
+                <ion-icon [name]="getIconForCategory(reporte.categoria)" color="white"></ion-icon>
+                <ion-label class="categoria-label">{{ reporte.categoria || 'Ninguna' }}</ion-label>
+              </ion-chip>
+            </div>
           </ion-card-header>
 
           <ion-card-content>
+            <ion-card-title style="color: black; justify-content: center; text-align: center;">{{ reporte.direccion
+              }}</ion-card-title>
             <p>{{ reporte.descripcion }}</p>
+            <p>{{reporte.fecha.toDate() | date: 'dd/MM/yyyy'}}</p>
+          </ion-card-content>
+
+          <!-- Botón para visualizar el reporte -->
+          <ion-footer style="display: flex; justify-content: flex-end; padding: 16px;">
+            <ion-button (click)="verDetalleReporte(reporte)" fill="clear">
+              <ion-icon name="information-circle" slot="icon-only" color="medium" style="font-size: 30px;"></ion-icon>
+            </ion-button>
+          </ion-footer>
+        </ion-card>
+      </div>
+    </div>
+
+    <!-- Sección de números de emergencia -->
+    <div class="emergency-footer">
+      <div class="emergency-card">
+        <ion-icon name="medical-outline"></ion-icon>
+        <span class="emergency-text">131</span>
+        <span style="color: black;">Ambulancia</span>
+      </div>
+      <div class="emergency-card">
+        <ion-icon name="flame-outline"></ion-icon>
+        <span class="emergency-text">132</span>
+        <span style="color: black;">Bomberos</span>
+      </div>
+      <div class="emergency-card">
+        <ion-icon name="shield-outline"></ion-icon>
+        <span class="emergency-text">(2)2922 3130</span>
+        <span style="color: black;">P.Cuadrante</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal para visualizar detalles del reporte -->
+  <ion-modal [isOpen]="modalDetalleAbierto" (ionModalDidDismiss)="cerrarDetalle()">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-title>Detalles del Reporte</ion-title>
+          <ion-buttons slot="end">
+            <ion-button (click)="cerrarDetalle()" fill="clear">
+              <ion-icon name="close" color="dark"></ion-icon>
+            </ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+
+      <ion-content class="modal-content">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title style="color: black;">{{ reporteSeleccionado.direccion }}</ion-card-title>
+            <div class="categoria-container"
+              [ngStyle]="{ 'background-color': getColorForCategory(reporteSeleccionado.categoria) }">
+              <ion-chip class="categoria-chip">
+                <ion-icon [name]="getIconForCategory(reporteSeleccionado.categoria)" color="white"></ion-icon>
+                <ion-label class="categoria-label">{{ reporteSeleccionado.categoria || 'Ninguna' }}</ion-label>
+              </ion-chip>
+            </div>
+          </ion-card-header>
+
+          <ion-card-content>
+            <p>{{ reporteSeleccionado.descripcion }}</p>
+            <img *ngIf="reporteSeleccionado.imagenUrl" [src]="reporteSeleccionado.imagenUrl" alt="Imagen del reporte"
+              style="width: 100%; height: auto;" />
           </ion-card-content>
         </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-
-  <ion-text color="medium" *ngIf="reportes.length === 0">
-    <p>No hay reportes registrados.</p>
-  </ion-text>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button (click)="abrirFormulario()">
@@ -84,39 +170,42 @@
               <ion-item>
                 <ion-label class="">Categoría</ion-label>
                 <ion-select [(ngModel)]="nuevoReporte.categoria" name="categoria" required>
-                  <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria }}</ion-select-option>
+                  <ion-select-option *ngFor="let categoria of categorias" [value]="categoria">{{ categoria
+                    }}</ion-select-option>
                 </ion-select>
               </ion-item>
               <ion-text color="danger" *ngIf="reporteForm.submitted && !nuevoReporte.categoria">
                 Categoría es obligatoria.
               </ion-text>
 
+              <ion-item>
+                <ion-label class="">Imagen (opcional)</ion-label>
+                <ion-input type="file" (change)="onFileSelected($event)"></ion-input>
+              </ion-item>
+
               <ion-button type="submit" expand="full" class="submit-button" shape="round">
                 Reportar
               </ion-button>
             </form>
+            <div class="emergency-footer">
+              <div class="emergency-card">
+                <ion-icon name="medical-outline"></ion-icon>
+                <span class="emergency-text">131</span>
+                <span style="color: black;">Ambulancia</span>
+              </div>
+              <div class="emergency-card">
+                <ion-icon name="flame-outline"></ion-icon>
+                <span class="emergency-text">132</span>
+                <span style="color: black;">Bomberos</span>
+              </div>
+              <div class="emergency-card">
+                <ion-icon name="shield-outline"></ion-icon>
+                <span class="emergency-text">(2)2922 3130</span>
+                <span style="color: black;">P.Cuadrante</span>
+              </div>
+            </div>
           </ion-card-content>
         </ion-card>
-
-        <!-- Footer con los números de emergencia -->
-        <div class="emergency-footer">
-          <div class="emergency-card">
-            <ion-icon name="medical-outline"></ion-icon>
-            <span class="emergency-text">131</span>
-            <span style="color: black;">Ambulancia</span>
-          </div>
-          <div class="emergency-card">
-            <ion-icon name="flame-outline"></ion-icon>
-            <span class="emergency-text">132</span>
-            <span style="color: black;">Bomberos</span>
-          </div>
-          <div class="emergency-card">
-            <ion-icon name="shield-outline"></ion-icon>
-            <span class="emergency-text">133</span>
-            <span style="color: black;">Carabineros</span>
-          </div>
-        </div>
-
       </ion-content>
     </ng-template>
   </ion-modal>

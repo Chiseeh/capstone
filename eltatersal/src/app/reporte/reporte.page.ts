@@ -1,8 +1,11 @@
-// reporte.page.ts
+
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../servicios/api.service';
 import { Reporte } from '../modelos/reporte';
 import { NavController, AlertController } from '@ionic/angular';
+import { Timestamp } from 'firebase/firestore';  // Importa Timestamp desde Firestore
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-reporte',
@@ -11,14 +14,27 @@ import { NavController, AlertController } from '@ionic/angular';
 })
 export class ReportePage implements OnInit {
   nuevoReporte: Reporte = {
-    id: 0,
+    id: '',
     direccion: '',
     descripcion: '',
-    categoria: ''
+    categoria: '',
+    imagenUrl: '',
+    fecha: Timestamp.now(),
   };
 
   reportes: Reporte[] = [];
+
   public modalAbierto: boolean = false;
+  public modalDetalleAbierto: boolean = false; // Modal para visualizar detalles
+  public reporteSeleccionado: Reporte = {
+    id: '',
+    direccion: '',
+    descripcion: '',
+    categoria: '',
+    imagenUrl: '',
+    fecha: Timestamp.now()
+  }; // Para almacenar el reporte seleccionado
+  selectedImage: File | null = null;
 
   categorias: string[] = [
     'Accidente',
@@ -30,14 +46,44 @@ export class ReportePage implements OnInit {
     'Salud'
   ].sort();
 
+
+  reportesActivos: number = 0; // Contador de reportes activos
+
   constructor(
     private apiService: ApiService,
     private navCtrl: NavController,
-    private alertController: AlertController // Añadir la dependencia de AlertController
+    private alertController: AlertController,
+    private datePipe: DatePipe,
+    private router: Router
   ) {}
+
+  resetFormulario() {
+    this.nuevoReporte = {
+      id: '',
+      direccion: '',
+      descripcion: '',
+      categoria: '',
+      imagenUrl: '',
+      fecha: Timestamp.now()
+    };
+  }
 
   ngOnInit() {
     this.listarReportes();
+  }
+
+   // Método para enviar reporte urgente a la página de inicio
+   enviarReporteUrgente(reporte: Reporte) {
+    this.router.navigate(['/inicio'], {
+      queryParams: {
+        id: reporte.id,
+        direccion: reporte.direccion,
+        descripcion: reporte.descripcion,
+        categoria: reporte.categoria,
+        imagenUrl: reporte.imagenUrl,
+        fecha: reporte.fecha.toDate().toISOString()
+      }
+    });
   }
 
   abrirFormulario() {
@@ -48,7 +94,14 @@ export class ReportePage implements OnInit {
     this.modalAbierto = false;
   }
 
-  // Método para mostrar una alerta si hay campos vacíos
+  contarReportesActivos() {
+    this.reportesActivos = this.reportes.length; // Contar la cantidad total de reportes
+  }
+
+  cerrarDetalle() {
+    this.modalDetalleAbierto = false; // Cerrar el modal de detalles
+  }
+
   async mostrarAlertaCamposIncompletos() {
     const alert = await this.alertController.create({
       header: 'Campos incompletos',
@@ -58,44 +111,60 @@ export class ReportePage implements OnInit {
     await alert.present();
   }
 
+  onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      this.selectedImage = input.files[0];
+    }
+  }
+
   registrarReporte() {
-    // Verificar si los campos están vacíos
     if (!this.nuevoReporte.direccion || !this.nuevoReporte.descripcion || !this.nuevoReporte.categoria) {
-      // Mostrar alerta si falta algún campo
       this.mostrarAlertaCamposIncompletos();
-      return; // Detener la ejecución si faltan campos
+      return;
     }
 
-    this.nuevoReporte.id = Date.now();
-    this.apiService.agregarReporte(this.nuevoReporte).subscribe(
-      () => {
-        // Reiniciar el formulario después de agregar el reporte
-        this.nuevoReporte = {
-          id: 0,
-          direccion: '',
-          descripcion: '',
-          categoria: '' // Limpiar las categorías
-        };
-        this.listarReportes(); // Actualizar la lista de reportes
-        this.cerrarFormulario(); // Cerrar el formulario modal
-      },
-      (error) => {
-        console.error('Error al registrar el reporte', error);
-      }
-    );
+    if (this.selectedImage) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.nuevoReporte.imagenUrl = e.target?.result as string;
+        this.nuevoReporte.id = Date.now().toString(); // Convierte el timestamp a string
+
+        this.apiService.agregarReporte(this.nuevoReporte).subscribe(
+          () => {
+            this.resetFormulario(); // Resetea el formulario
+            this.cerrarFormulario(); // Cierra el formulario
+          },
+          (error) => console.error('Error al registrar el reporte', error)
+        );
+      };
+      reader.readAsDataURL(this.selectedImage);
+    } else {
+      this.nuevoReporte.id = Date.now().toString(); // Convierte el timestamp a string
+      this.apiService.agregarReporte(this.nuevoReporte).subscribe(
+        () => {
+          this.resetFormulario(); // Resetea el formulario
+          this.cerrarFormulario(); // Cierra el formulario
+        },
+        (error) => console.error('Error al registrar el reporte', error)
+      );
+    }
   }
 
   listarReportes() {
     this.apiService.listarReportes().subscribe(
       (datos) => {
-        this.reportes = datos;
+        this.reportes = datos.map(reporte => ({
+          ...reporte,
+          fechaFormateada: reporte.fecha ? this.datePipe.transform(reporte.fecha.toDate(), 'dd/MM/yyyy') : 'Fecha no disponible' // Maneja caso donde fecha es null
+        }));
+        this.contarReportesActivos();
       },
       (error) => {
         console.error('Error al obtener la lista de reportes', error);
       }
     );
   }
-
   volverInicio() {
     this.navCtrl.navigateRoot('inicio');
   }
@@ -104,7 +173,13 @@ export class ReportePage implements OnInit {
     this.navCtrl.back();
   }
 
-  // Métodos auxiliares para obtener íconos y colores según la categoría
+  // Método para manejar la visualización del detalle del reporte
+  verDetalleReporte(reporte: Reporte) {
+    this.reporteSeleccionado = reporte;
+    this.modalDetalleAbierto = true; // Abrir el modal de detalle
+  }
+
+
   getIconForCategory(categoria: string): string {
     switch (categoria) {
       case 'Accidente':
@@ -125,6 +200,7 @@ export class ReportePage implements OnInit {
         return 'clipboard';
     }
   }
+
 
   getColorForCategory(categoria: string): string {
     switch (categoria) {

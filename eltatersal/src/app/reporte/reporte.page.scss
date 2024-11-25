@@ -1,6 +1,173 @@
-/* Estilos generales */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
 ion-content {
-  --background: #f7f7f7; /* COLOR DE FONDO */
+  font-family: 'Poppins', sans-serif;
+  --background: #A58BD4;
+  .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    .back_div{
+      font-size: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      ion-title {
+        color: #fff;
+        font-size: 25px;
+        padding-left: 20px;
+        padding: 30px;
+        text-align: center;
+      }
+    }
+  }
+
+  .content_div {
+    background: white;
+    width: 100%;
+    border-top-right-radius: 35px;
+    border-top-left-radius: 35px;
+    margin-top: 25px;
+    padding-top: 30px;
+    padding: 20px;
+    padding-bottom: 50px;
+    height: auto;
+    min-height: calc(100% - 80px);
+    .cardData {
+      padding-left: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      margin-bottom: 10px;
+
+      background-color: #E0F7F4;
+      border: 2px solid #A58BD4;
+      border-radius: 20px;
+      height: auto;
+      #subject {
+        color: #9f0d9f;
+        background-color: #e6efff;
+        padding: 5px;
+        border-radius: 10px;
+      }
+      .box {
+        display: grid;
+        grid-template-columns: 25% 75%;
+        padding-left: 10px;
+        padding-top: 10px;
+        justify-items: center;
+        grid-gap: 10px;
+      }
+      .thumbnail {
+        img {
+          width: 100%;
+          border-radius: 10px;
+        }
+      }
+      .descripcion {
+        justify-self: start;
+        span {
+          color: purple;
+        }
+        .paragraph {
+          text-align: justify;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
+}
+
+.bienvenida-card {
+  background-color: #E0F7F4; /* Verde menta claro */
+  border-left: 5px solid #A58BD4; /* Borde que combine con el morado */
+  border-radius: 15px;
+  margin: 20px;
+  padding: 15px;
+  text-align: center;
+}
+
+.bienvenida-icon {
+  color: #A58BD4;
+  margin-bottom: 10px;
+}
+
+.bienvenida-titulo {
+  font-family: "Poppins", sans-serif;
+  color: #A58BD4;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.bienvenida-descripcion {
+  font-family: "Roboto", sans-serif;
+  color: #7a7a7a;
+  font-size: 0.9rem;
+  margin-top: 0;
+}
+
+.welcome-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  background-color: #f9f4ff; /* Un color lavanda claro que combina con el morado */
+  border-radius: 15px;
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Sombra para un efecto de elevación */
+  width: 90%; /* Ancho para ocupar la mayoría del contenedor */
+  max-width: 800px; /* Tamaño máximo para evitar expansión en pantallas grandes */
+  margin: 20px auto; /* Centrado y margen superior e inferior */
+  border: 2px solid #A58BD4; /* Borde morado */
+
+}
+
+
+h2 {
+  font-family: 'Roboto', sans-serif; /* Cambia a la fuente que prefieras */
+  font-size: 2rem; /* Tamaño más grande para destacar el título */
+  font-weight: bold;
+  color: #A58BD4; /* Color morado, acorde a tu página */
+  text-align: center;
+  margin-bottom: 10px; /* Ajuste de espacio entre el título y la descripción */
+}
+
+p {
+  font-family: Arial, sans-serif; /* Fuente sencilla para la descripción */
+  font-size: 1rem; /* Tamaño más pequeño para diferenciar del título */
+  color: #4f4f4f; /* Color gris oscuro para un buen contraste */
+  line-height: 1.5; /* Mejora la legibilidad */
+  text-align: center; /* Centra el texto para mantener la consistencia visual */
+  margin-bottom: 20px; /* Espacio entre el párrafo y los elementos siguientes */
+}
+
+/* Carrusel de reportes */
+.reportes-carousel {
+  overflow-x: auto; /* Permitir el desplazamiento horizontal */
+  white-space: nowrap; /* Evitar el salto de línea en los hijos */
+  padding: 10px 0; /* Espaciado vertical */
+}
+
+.reportes-container {
+  display: inline-flex; /* Alinear las tarjetas en una fila */
+}
+
+/* Card general */
+ion-card {
+  border-radius: 15px;  /* Bordes más sutiles */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);  /* Sombra más clara */
+  background-color: #ffffff; /* Fondo blanco puro */
+  transition: transform 0.3s ease; /* Animación en hover */
+}
+
+.card-reporte{
+  width: 340px;
+}
+
+ion-card:hover {
+  transform: translateY(-5px); /* Levantar tarjeta en hover */
 }
 
 /* Categoria - Contenedor */
@@ -29,7 +196,7 @@ ion-content {
 /* Categoria Label */
 .categoria-label {
   font-weight: bold;
-  color: rgb(255, 255, 255) !important; /*Color de la letra de Categoría en el chip*/
+  color: rgb(255, 255, 255) !important; /* Color de la letra de Categoría en el chip */
 }
 
 /* Dirección y Descripción */
@@ -37,13 +204,6 @@ ion-content {
   padding: 15px;
   font-size: 1.1em;
   color: #000000; /* TEXTO DE LA DESCRIPCIÓN */
-}
-
-/* Card general */
-ion-card {
-  border-radius: 15px;  /* Bordes más sutiles */
-  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);  /* Sombra más clara */
-  background-color: #ffffff; /* Fondo blanco puro */
 }
 
 /* Modal */
@@ -143,7 +303,7 @@ ion-label {
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transition: transform 0.2s ease-in-out;
-  width: 90px;
+  width: 100px;
   text-align: center;
 }
 

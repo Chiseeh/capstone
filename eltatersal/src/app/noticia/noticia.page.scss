@@ -1,8 +1,283 @@
-ion-toolbar {
-  --background: #16613a;
-  --color: white;
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
-  --min-height: 80px;
-  --padding-top: 20px;
-  --padding-bottom: 20px;
+ion-content {
+  font-family: 'Poppins', sans-serif;
+  --background: #A58BD4;
+  .top{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 40px;
+    margin-left: 20px;
+    margin-right: 20px;
+    .back_div{
+      font-size: 30px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      ion-title {
+        color: #fff;
+        font-size: 25px;
+        padding-left: 20px;
+        padding: 30px;
+        text-align: center;
+      }
+    }
+  }
+
+  .content_div {
+    background: white;
+    width: 100%;
+    border-top-right-radius: 35px;
+    border-top-left-radius: 35px;
+    margin-top: 25px;
+    padding-top: 30px;
+    padding: 20px;
+    padding-bottom: 50px;
+    height: auto;
+    min-height: calc(100% - 80px);
+    .cardData {
+      padding-left: 20px;
+      padding-top: 20px;
+      padding-bottom: 20px;
+      margin-bottom: 10px;
+
+      background-color: #E0F7F4;
+      border: 2px solid #A58BD4;
+      border-radius: 20px;
+      height: auto;
+      #subject {
+        color: #9f0d9f;
+        background-color: #e6efff;
+        padding: 5px;
+        border-radius: 10px;
+      }
+      .box {
+        display: grid;
+        grid-template-columns: 25% 75%;
+        padding-left: 10px;
+        padding-top: 10px;
+        justify-items: center;
+        grid-gap: 10px;
+      }
+      .thumbnail {
+        img {
+          width: 100%;
+          border-radius: 10px;
+        }
+      }
+      .descripcion {
+        justify-self: start;
+        span {
+          color: purple;
+        }
+        .paragraph {
+          text-align: justify;
+          margin-right: 20px;
+        }
+      }
+    }
+  }
 }
+
+.noticia {
+  margin-bottom: 20px;
+}
+
+/* Centrar el texto en las columnas de días y horario */
+.dias-horario {
+  text-align: center;
+}
+
+
+/* Header of the feria table */
+.feria-card {
+  font-weight: bold !important;
+  text-align: center !important;
+  background-color: #A58BD4 !important; /* Background color */
+  color: rgba(7, 7, 7, 0.733) !important; /* Text color */
+  padding: 12px 0 !important; /* Increased padding for more space */
+  border-bottom: 10px solid #ccc  !important; /* Border to separate from rows */
+
+}
+/* Style for the Lista de Ferias title */
+.lista-ferias-title {
+  font-size: 24px; /* Adjust size as needed */
+  font-weight: bold;
+  color: white; /* Or choose a color that stands out */
+  text-align: center;
+  margin: 0;
+  padding: 10px 0;
+}
+
+/* Estilo de la tarjeta de la lista */
+.Lista-card {
+  background-color: #E0F7F4; /* Verde menta claro */
+  border-left: 10px solid #A58BD4; /* Borde morado */
+  border-right:10px solid #A58BD4;
+  border-radius: 15px;
+  margin: 20px;
+  padding: 15px;
+  text-align: center;
+}
+
+/* Separación y diseño de filas */
+.feria-row {
+  border-bottom: 5px solid #ccc;
+  padding: 10px 0;
+  background-color: #E8F4F8; /* Light background color for rows */
+}
+
+.news-card {
+  width: calc(100% - 40px); /* Tarjetas más anchas pero no a pantalla completa */
+  max-width: 500px; /* Limitar el ancho máximo para que no sea demasiado ancha en pantallas grandes */
+  margin: 10px auto; /* Centrar la tarjeta */
+  border: 2px solid #A58BD4;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border-radius: 10px; /* Esquinas redondeadas */
+  height: auto; /* Deja que la tarjeta ajuste su altura según el contenido */
+  padding: 10px; /* Espacio interno reducido */
+  background-color: #E0F7F4; /* Verde menta claro */
+}
+
+.imagen-noticia, .video-noticia {
+  width: 100%;
+  height: 150px; /* Reducir la altura de las imágenes/videos */
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.titulo-noticia {
+  font-family: "Poppins", sans-serif;
+  color: #A58BD4;
+  font-size: 1rem; /* Ligeramente más pequeño para reducir el tamaño de la tarjeta */
+  font-weight: 900;
+  text-transform: uppercase;
+  text-align: center;
+  padding: 0 10px;
+  margin-top: 5px;
+  line-height: 1.2;
+}
+
+.descripcion-noticia {
+  font-family: "Roboto", sans-serif;
+  font-size: 0.8rem; /* Reducir el tamaño de la descripción */
+  color: #7a7a7a;
+  font-weight: 600;
+  margin-top: 3px;
+  line-height: 1.4; /* Reducir la altura de línea para hacerla más compacta */
+  text-align: center;
+  padding: 0 10px;
+}
+
+.fecha-noticia {
+  font-size: 0.75rem;
+  color: #999999;
+  text-align: left;
+  padding: 0 10px 10px;
+}
+
+ion-button {
+  --background: #A58BD4;
+  --border-radius: 20px;
+  --padding-start: 10px;
+  --padding-end: 10px;
+}
+
+.boton-ver-mas ion-button {
+  width: auto; /* Evita que el botón ocupe todo el ancho */
+  font-size: 0.8rem; /* Reducir el tamaño del texto */
+  padding: 8px 16px; /* Ajusta el tamaño del botón */
+  margin: 10px auto; /* Centrar el botón */
+  display: block; /* Asegura que el botón se centre como bloque */
+  border-radius: 20px; /* Mantener bordes redondeados si lo deseas */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.bienvenida-card {
+  background-color: #E0F7F4; /* Verde menta claro */
+  border-left: 5px solid #A58BD4; /* Borde que combine con el morado */
+  border-radius: 15px;
+  margin: 20px;
+  padding: 15px;
+  text-align: center;
+}
+
+.bienvenida-icon {
+  color: #A58BD4;
+  margin-bottom: 10px;
+}
+
+.bienvenida-titulo {
+  font-family: "Poppins", sans-serif;
+  color: #A58BD4;
+  font-weight: 700;
+  font-size: 1.4rem;
+  margin-bottom: 5px;
+}
+
+.bienvenida-descripcion {
+  font-family: "Roboto", sans-serif;
+  color: #7a7a7a;
+  font-size: 0.9rem;
+  margin-top: 0;
+}
+
+.fecha-noticia {
+  font-size: 0.75rem;
+  color: #999999;
+  text-align: left;
+  padding: 0 10px 10px;
+  text-align: center;
+}
+
+.uf-card {
+  background: linear-gradient(225deg, #e9f0fc 0%, #a58bd4 100%);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  color: white;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.15);
+  font-family: 'Poppins', sans-serif;
+
+  .uf-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 12px;
+
+    .uf-icon {
+      font-size: 2.5em;
+      color: #ffd700;
+      margin-right: 8px;
+    }
+
+    .uf-title {
+      font-size: 1.6em;
+      font-weight: bold;
+    }
+  }
+
+  .uf-content {
+    .uf-value {
+      font-size: 2em;
+      font-weight: bold;
+      margin: 0;
+    }
+
+    .uf-date {
+      font-size: 1em;
+      color: rgba(255, 255, 255, 0.8);
+      margin-top: 4px;
+    }
+  }
+
+
+
+
+
+
+}
+
+
+

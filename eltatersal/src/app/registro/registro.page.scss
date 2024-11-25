@@ -1,6 +1,61 @@
-.button-container {
+.registro-content {
+  --background: #f4f4f4;
+}
+
+.tolbar {
+  --background: #f4f4f4;
+}
+
+.header-background {
+  background: #7d5ba6; /* Morado del banner principal */
+  text-align: center;
+  padding: 2rem 1rem;
+  border-radius: 0 0 20px 20px;
+}
+
+.icon-wrapper {
+  background-color: white;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  margin: 0 auto 1rem auto;
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  height: 100%; /* Asegúrate de que el contenedor tenga una altura adecuada */
+  justify-content: center;
+  align-items: center;
+}
+
+.header-icon {
+  font-size: 4rem;
+  color: #7d5ba6; /* Usa el color morado */
+}
+
+.header-title {
+  font-size: 1.8rem;
+  color: white;
+  margin-top: 0.5rem;
+}
+
+.header-subtitle {
+  color: white;
+  margin-bottom: 1.5rem;
+}
+
+.custom-button {
+  margin-top: 1.5rem;
+  background-color: #7d5ba6;
+  --background-focused: #6a4893;
+  --background-activated: #5b3c7a;
+  border-radius: 20px; /* Botón redondeado */
+  font-weight: bold;
+  color: white;
+}
+
+.login-link {
+  text-align: center;
+  margin-top: 1rem;
+}
+
+.login-link a {
+  color: #7d5ba6;
+  font-weight: bold;
 }

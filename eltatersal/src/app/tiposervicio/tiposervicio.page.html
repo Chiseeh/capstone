@@ -1,0 +1,144 @@
+<ion-content>
+
+  <div class="top">
+    <div class="back_div">
+      <ion-buttons slot="start">
+        <ion-back-button default-href="#" color="light"></ion-back-button>
+      </ion-buttons>
+      <ion-title class="ion-text-center">Servicios</ion-title>
+    </div>
+  </div>
+
+  <div class="content_div">
+    <ion-card class="cardData">
+      <ion-card-content>
+        <h2 class="bienvenida-titulo">¡Necesitas ayuda!</h2>
+        <p class="bienvenida-descripcion">
+          Te mostramos los diferentes tipos de servicios brindados para los vecinos.
+        </p>
+      </ion-card-content>
+    </ion-card>
+
+    <ion-grid class="funcionalidades-grid">
+      <ion-row>
+        <ion-col size="6" class="funcionalidad-col">
+          <ion-card button class="cardData" id="quejas" [routerLink]="['/quejas']">
+            <ion-card-content>
+              <div class="icono-titulo">
+                <ion-icon color="danger" name="megaphone-outline" size="large" class="funcionalidades-icon"></ion-icon>
+                <span id="subject">Registrar Queja</span>
+              </div>
+              <div class="descripcion">
+                Inicia el proceso de registrar tus quejas fácilmente.
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6" class="funcionalidad-col">
+          <ion-card button class="cardData" id="eventos" [routerLink]="['/evento']">
+            <ion-card-content>
+              <div class="icono-titulo">
+                <ion-icon color="dark" name="calendar-outline" size="large"></ion-icon>
+                <span id="subject">Eventos</span>
+              </div>
+              <div class="descripcion">
+                Descubre y participa en eventos de la comunidad.
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+
+      <ion-row>
+        <ion-col size="6" class="funcionalidad-col">
+          <ion-card button class="cardData" id="reportar" [routerLink]="['/reporte']">
+            <ion-card-content>
+              <div class="icono-titulo">
+                <ion-icon color="danger" name="alert-circle-outline" size="large"></ion-icon>
+                <span id="subject">Reportar Situación</span>
+              </div>
+              <div class="descripcion">
+                Reporta situaciones importantes de manera rápida.
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+
+        <ion-col size="6" class="funcionalidad-col">
+          <ion-card button class="cardData" id="noticias" [routerLink]="['/noticia']">
+            <ion-card-content>
+              <div class="icono-titulo">
+                <ion-icon color="primary" name="newspaper-outline" size="large"></ion-icon>
+                <span id="subject">Noticias</span>
+              </div>
+              <div class="descripcion">
+                Mantente informado sobre las últimas novedades.
+              </div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+    <!-- Nueva tarjeta para Documentos -->
+    <ion-row>
+      <ion-col size="6" class="funcionalidad-col">
+        <ion-card button class="cardData" id="documentos" [routerLink]="['/documentos2']">
+          <ion-card-content>
+            <div class="icono-titulo">
+              <ion-icon color="primary" name="document-text-outline" size="large"></ion-icon>
+              <span id="subject">Documentos</span>
+            </div>
+            <div class="descripcion">
+              Solicita los documentos necesarios en la Junta de Vecinos.
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+
+      <ion-col size="6" class="funcionalidad-col">
+        <ion-card button class="cardData" id="estadisticas">
+          <ion-card-content>
+            <div class="icono-titulo">
+              <ion-icon color="primary" name="document-text-outline" size="large"></ion-icon>
+              <span id="subject">Estadísticas</span>
+            </div>
+            <div class="descripcion">
+              Consulta las estadísticas de nuestra APP.
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" class="funcionalidad-col">
+        <ion-card button class="cardData" id="mascotasperdidas" [routerLink]="['/mascotasperdidas']">
+          <ion-card-content>
+            <div class="icono-titulo">
+              <ion-icon color="primary" name="paw" size="large"></ion-icon>
+              <span id="subject">Mascotas Perdidas</span>
+            </div>
+            <div class="descripcion">
+              Verifica si tu alguien vio a tu mascota
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+
+      <ion-col size="6" class="funcionalidad-col">
+        <ion-card button class="cardData" id="mascotasperdidas" [routerLink]="['/asistencia']">
+          <ion-card-content>
+            <div class="icono-titulo">
+              <ion-icon color="primary" name="hand-left-outline" size="large"></ion-icon>
+              <span id="subject">Asistencia Asamblea</span>
+            </div>
+            <div class="descripcion">
+              Registra asistencia en la asamblea
+            </div>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </div>
+</ion-content>

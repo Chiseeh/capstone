@@ -1,0 +1,281 @@
+/* Estilo para el fondo de la página */
+
+ion-toolbar {
+  --background: #A58BD4; /* Color morado para el encabezado */
+}
+
+ion-content {
+  --background: #ffffff; /* Fondo blanco para el contenido */
+  background: linear-gradient(to bottom, #A58BD4 50%, #ffffff 50%); /* Transición entre azul y blanco */
+  padding: 0; /* Aseguramos que no haya relleno adicional */
+}
+/* Estilo para la tarjeta de perfil */
+.card {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.img-bx {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 20px auto;
+  overflow: hidden;
+}
+
+.img-bx img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.content .detail {
+  padding: 0 15px;
+}
+
+.content .detail h2 {
+  font-size: 1.6em;
+  font-weight: bolder;
+  color: #444;
+}
+
+.content .detail h2 span {
+  font-size: 0.8em;
+  color: #03a9f4;
+}
+
+.content .detail p {
+  font-size: 1.1em;
+  color: #444;
+  margin: 8px 0;
+}
+
+.sci {
+  display: flex;
+  justify-content: center;
+  margin-top: 15px;
+}
+
+.sci li {
+  list-style: none;
+  margin: 0 8px;
+}
+
+.sci li a {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: #f4f4f4;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #444;
+  font-size: 1.2em;
+  text-decoration: none;
+  transition: background-color 0.3s;
+}
+
+.sci li a:hover {
+  background-color: #03a9f4;
+  color: white;
+}
+
+ion-card {
+  margin-top: 20px;
+}
+
+/* Estilo para la card del código QR */
+section.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 400px;
+  background: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+  padding: 20px;
+  text-align: center;
+}
+
+section.card .product-image img {
+  width: 200px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+section.card .product-info h2 {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #444;
+  margin-bottom: 10px;
+}
+
+section.card .product-info p {
+  font-size: 1.1em;
+  color: #777;
+}
+
+section.card .price {
+  font-size: 1.2em;
+  color: #03a9f4;
+  margin: 10px 0;
+}
+
+section.card .btn {
+  margin-top: 20px;
+}
+
+section.card .btn .buy-btn {
+  padding: 10px 20px;
+  font-size: 1em;
+  background-color: #A58BD4;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+section.card .btn .buy-btn:hover {
+  background-color: #7f64a4;
+}
+
+/* Estilo para el escáner de QR */
+ion-button {
+  margin: 20px 0;
+  background-color: #A58BD4;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+ion-button:hover {
+  background-color: #7f64a4;
+}
+
+/* Estilo para la información escaneada */
+ion-card {
+  margin-top: 20px;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+.form-container ion-item {
+  margin-bottom: 20px;
+}
+
+.submit-btn {
+  background-color: #5f4b8b;
+  color: white;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.submit-btn:hover {
+  background-color: #6e4b8b;
+}
+
+
+/* Modificaciones para la disposición horizontal */
+.asambleas-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around; /* Ajusta los elementos con espacio alrededor */
+  margin-top: 20px;
+}
+
+.asamblea-card {
+  width: 250px; /* Ajusta el ancho de las tarjetas */
+  margin: 10px;
+  text-align: center;
+}
+
+.qr-button {
+  margin-top: 10px;
+}
+
+/* Estilos para el contenedor del QR */
+.qr-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+/* Estilo para los textos dentro de la tarjeta */
+.text-center {
+  text-align: center;
+}
+
+
+
+.asamblea-list {
+  margin-top: 30px;
+}
+
+.asamblea-item {
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+  background-color: #f7f7f7;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.asamblea-item:hover {
+  background-color: #e6e6e6;
+}
+
+.asamblea-titulo {
+  font-size: 1.4em;
+  font-weight: bold;
+  color: #333;
+}
+
+.asamblea-descripcion {
+  color: #666;
+  margin: 10px 0;
+}
+
+.asamblea-hora {
+  color: #999;
+  font-size: 0.9em;
+}
+
+.qr-btn {
+  margin-top: 15px;
+  background-color: #8e44ad;
+  color: white;
+  border-radius: 8px;
+  transition: background-color 0.3s;
+}
+
+.qr-btn:hover {
+  background-color: #9b59b6;
+}
+
+qrcode {
+  margin-top: 20px;
+}
+
+.titulo-asamblea {
+  font-size: 2.5em;
+  font-weight: bold;
+  color: purple;
+  text-align: center;
+  margin-bottom: 20px;
+}

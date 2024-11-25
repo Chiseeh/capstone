@@ -1,0 +1,156 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+
+ion-content {
+    font-family: 'Poppins', sans-serif;
+    --background: #A58BD4;
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 40px;
+        margin-left: 20px;
+        margin-right: 20px;
+
+        .back_div {
+            font-size: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            ion-title {
+                color: #fff;
+                font-size: 25px;
+                padding-left: 20px;
+                padding: 30px;
+                text-align: center;
+            }
+        }
+    }
+
+    .content_div {
+        background: white;
+        width: 100%;
+        border-top-right-radius: 35px;
+        border-top-left-radius: 35px;
+        margin-top: 25px;
+        padding-top: 30px;
+        padding: 20px;
+        padding-bottom: 50px;
+        height: auto;
+        min-height: calc(100% - 80px);
+
+        .cardData {
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 10px;
+
+            background-color: #E0F7F4;
+            border: 2px solid #A58BD4;
+            border-radius: 20px;
+            height: auto;
+
+            #subject {
+                color: #9f0d9f;
+                background-color: #e6efff;
+                padding: 5px;
+                border-radius: 10px;
+            }
+
+            .thumbnail {
+                img {
+                    width: 100%;
+                    border-radius: 10px;
+                }
+            }
+
+            .descripcion {
+                justify-self: start;
+
+                span {
+                    color: purple;
+                }
+
+                .paragraph {
+                    text-align: justify;
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}
+
+
+@media(max-width: 768px) {
+    .roles-title {
+        font-size: 1.5em;
+        margin-bottom: 15px;
+        text-align: center;
+        color: rgba(123, 107, 188);
+    }
+
+    .roles-row {
+        display: flex;
+        flex-wrap: nowrap;
+        /* Esto permite que las cartas se alineen en una fila sin saltos */
+        overflow-x: auto;
+        /* Esto agrega desplazamiento horizontal en pantallas pequeñas */
+    }
+
+    .member-card {
+        width: 120px;
+        /* Ajusta este valor para cambiar el tamaño general */
+        height: 150px;
+        /* Asegura que la tarjeta sea cuadrada */
+        text-align: center;
+        padding: 10px;
+        border-radius: 12px;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+        margin-right: 10px;
+        /* Espacio entre las cartas */
+        flex-shrink: 0;
+        /* Evita que las cartas se reduzcan al cambiar el tamaño de pantalla */
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        /* Distribuye el contenido de manera uniforme */
+        align-items: center;
+        background-color: white;
+        border: 2px solid #A58BD4;
+        /* Borde morado */
+        margin: 15px 5px;
+        /* Ajustar margen superior/inferior y lateral */
+        padding: 10px;
+        /* Espaciado interno dentro de la carta */
+    }
+
+    .member-photo {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        margin-bottom: 10px;
+        object-fit: cover;
+    }
+
+    .member-name {
+        font-size: 1em;
+        margin-top: 5px;
+        font-family: 'Poppins', sans-serif;
+        /* Usando Poppins */
+        font-weight: 700;
+        /* Peso más grueso */
+        color: #A58BD4;
+        /* Puedes mantener el color aquí o en el HTML */
+    }
+
+    .member-role {
+        font-size: 0.9em;
+        margin-bottom: 10px;
+        color: #555;
+        font-family: 'Montserrat', sans-serif;
+        /* Usando Montserrat */
+        font-weight: 700;
+        /* Peso más grueso */
+    }
+}

@@ -1,0 +1,53 @@
+ion-toolbar {
+  --background: #A58BD4;
+  --color: white;
+  border: 2px solid #E0F7F4;
+}
+
+ion-content{
+  background-color: rgb(245, 246, 255);
+}
+
+
+.services-list {
+  padding: 16px;
+  border: 2px solid #A58BD4; /* Borde morado */
+}
+
+.service-item {
+  background: #fff;
+  border-radius: 12px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  font-size: 18px;
+  --padding-start: 12px;
+  --padding-end: 12px;
+}
+
+.service-item ion-icon {
+  font-size: 24px;
+  color: #6a1b9a; /* Color de icono morado */
+}
+
+ion-content {
+  --background: url('/assets/img/fondo.png') repeat;
+  background-size: cover;
+}
+
+ion-button {
+  margin-top: 8px;
+  --background: #A58BD4; /* Color morado para los botones */
+}
+
+.services-list {
+  padding: 16px;
+}
+
+.document-list {
+  margin-bottom: 24px; /* Espacio entre listas */
+  background: #fff; /* Fondo blanco individual para cada lista */
+  border-radius: 12px;
+  padding: 16px;
+  border: 2px solid #A58BD4; /* Borde morado para cada documento */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}

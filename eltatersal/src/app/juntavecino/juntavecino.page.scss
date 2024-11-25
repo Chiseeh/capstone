@@ -1,0 +1,137 @@
+ion-content {
+    font-family: 'Poppins', sans-serif;
+    --background: #A58BD4;
+
+    .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-top: 40px;
+        margin-left: 20px;
+        margin-right: 20px;
+
+        .back_div {
+            font-size: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            ion-title {
+                color: #fff;
+                font-size: 25px;
+                padding-left: 20px;
+                padding: 30px;
+                text-align: center;
+            }
+        }
+    }
+
+    .content_div {
+        background: white;
+        width: 100%;
+        border-top-right-radius: 35px;
+        border-top-left-radius: 35px;
+        margin-top: 25px;
+        padding-top: 30px;
+        padding: 20px;
+        padding-bottom: 50px;
+        height: auto;
+        min-height: calc(100% - 80px);
+
+        .cardData {
+            padding-left: 20px;
+            padding-top: 20px;
+            padding-bottom: 20px;
+            margin-bottom: 10px;
+
+            background-color: #E0F7F4;
+            border: 2px solid #A58BD4;
+            border-radius: 20px;
+            height: auto;
+
+            #subject {
+                color: #9f0d9f;
+                background-color: #e6efff;
+                padding: 5px;
+                border-radius: 10px;
+            }
+
+            .box {
+                display: grid;
+                grid-template-columns: 25% 75%;
+                padding-left: 10px;
+                padding-top: 10px;
+                justify-items: center;
+                grid-gap: 10px;
+            }
+
+            .descripcion {
+                justify-self: start;
+
+                span {
+                    color: purple;
+                }
+
+                .paragraph {
+                    text-align: justify;
+                    margin-right: 20px;
+                }
+            }
+        }
+    }
+}
+
+/* Estilos para About Us */
+.about-us {
+    background-color: rgb(245, 246, 255);
+    /* Fondo similar al inicio */
+    padding: 20px;
+    /* Espaciado interno */
+}
+
+.about-us .title-large {
+    font-size: 1.8em;
+    font-weight: bold;
+    text-align: center;
+    padding: 0.5em 0;
+    color: #A58BD4;
+    /* Color morado para el título */
+}
+
+.about-us-card {
+    background-color: white;
+    /* Fondo blanco */
+    color: #333;
+    /* Color de texto */
+    text-align: center;
+    border-radius: 16px;
+    /* Bordes redondeados */
+    margin: 15px auto;
+    padding: 15px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+    max-width: 90%;
+    /* Limitar el ancho máximo */
+    border: 2px solid #A58BD4;
+    /* Borde morado */
+}
+
+.about-title {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    color: #A58BD4;
+    /* Color morado para el título */
+}
+
+.about-us-image {
+    width: 100%;
+    height: auto;
+    border-radius: 8px 8px 0 0;
+    object-fit: cover;
+}
+
+.about-us-text {
+    padding: 15px;
+    font-size: 1em;
+    color: rgba(0, 0, 0, 0.8);
+    /* Texto en gris oscuro */
+}

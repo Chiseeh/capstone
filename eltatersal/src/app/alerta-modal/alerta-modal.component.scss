@@ -1,0 +1,49 @@
+.alert-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%; /* Asegura que ocupe toda la altura del contenedor */
+}
+
+.alert-card {
+  width: 90%; /* O el ancho que desees */
+  max-width: 400px; /* Un ancho máximo para la tarjeta */
+  border-radius: 12px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.alert-box {
+  background-color: #ffffff; /* Cambia el color de fondo según sea necesario */
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  text-align: center; /* Cambiado a centrado para alinear líneas del mensaje */
+  font-size: 1.2em; /* Aumentar el tamaño del texto para mejor legibilidad */
+  color: #333; /* Color del texto */
+}
+
+.alert-line {
+  margin: 5px 0; /* Espaciado entre las líneas del mensaje */
+}
+
+ion-card-title {
+  font-size: 1.5em; /* Tamaño del título */
+  color: #A58BD4; /* Color del título, ajusta según tu tema */
+  text-align: center; /* Centrar el texto del título */
+}
+
+.alert-icon-container {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente el ícono */
+  margin-top: 5px; /* Espacio entre el título y el ícono */
+}
+
+.alert-icon {
+  color: red; /* Cambia el color del ícono a rojo */
+  font-size: 2em; /* Ajusta el tamaño del ícono */
+}
+
+.center-title {
+  text-align: center; /* Centrar el texto */
+  flex: 1; /* Permitir que el título use el espacio disponible */
+}
